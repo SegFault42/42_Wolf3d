@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/05/08 17:18:46 by rabougue         ###   ########.fr        #
+#    Updated: 2016/05/09 12:20:17 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,10 @@ END = \033[0m
 NAME = Wolf3d
 FLAG = -Wall -Werror -Wextra -Ofast
 FRAMEWORK = -framework OpenGL -framework AppKit
-OBJS = ./main.o
+OBJS = ./main.o \
+	   ./init.o \
 
-INCLUDE = $(wildcard ./includes/fractol.h ./includes/keyboard.h)
+INCLUDE = $(wildcard ./includes/Wolf3d.h ./includes/keyboard.h)
 
 LFT = -L./libft/ -lft
 LMLX = -L./minilibx_macos/ -lmlx
@@ -36,15 +37,15 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@printf "$(GREY)Compiling libft.a ...$(GREY)"
 	@make -s -C ./libft/
-	@printf "           [$(GREEN)Success$(GREY)]\n"
+	@printf "                   [$(GREEN)Success$(GREY)]\n"
 	@printf "Compiling mlx.a ..."
 	@make -s -C ./minilibx_macos/
-	@printf "             [$(GREEN)Success$(GREY)]\n"
+	@printf "                     [$(GREEN)Success$(GREY)]\n"
 	@printf "Compiling .o ..."
-	@printf "                [$(GREEN)Success$(GREY)]\n"
+	@printf "                        [$(GREEN)Success$(GREY)]\n"
 	@printf "Compiling Wolf3d ..."
 	@gcc $(FLAG) -o $(NAME) $(OBJS) $(LMLX) $(LFT) $(FRAMEWORK)
-	@printf "           [$(GREEN)Success$(GREY)]\n$(END)"
+	@printf "                    [$(GREEN)Success$(GREY)]\n$(END)"
 
 %.o : %.c ${INCLUDE}
 		@gcc -c $(FLAG) $< -o $@

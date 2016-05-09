@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/05/04 09:00:41 by rabougue         ###   ########.fr        #
+#    Updated: 2016/05/09 15:01:55 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c ft_memchr.c\
 	  ft_putnbr_fd.c ft_strsplit.c ft_strlcat.c ft_itoa.c ft_lstnew.c \
 	  ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c \
 	  ft_swap.c ft_strrev.c ft_crypt.c ft_decrypt.c ft_debug.c get_next_line.c\
-	  ft_tab_free.c ft_tab_len.c ft_count_line_in_file.c ft_sqrt.c
+	  ft_tab_free.c ft_tab_len.c ft_count_line_in_file.c ft_sqrt.c \
+	  ft_strcmp_ext.c
 
 OBJS = $(SRC:.c=.o)
 

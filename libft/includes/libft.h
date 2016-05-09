@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 18:34:24 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/04 09:00:33 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/09 15:01:35 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,6 @@ int					get_next_line(int const fd, char **line);
 void				tab_free(char **tab);
 int					tab_len(char **tab);
 double				ft_sqrt(double a);
+int					ft_strcmp_ext(char *str, char *ext);
 
 #endif
