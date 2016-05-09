@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 12:52:14 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/09 12:19:25 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/10 00:05:46 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include "../libft/includes/libft.h"
 # include "./keyboard.h"
 
-# define W 640
-# define H 480
+//# define W 512
+//# define H 384
 # define MAPWIDTH 24
 # define MAPHEIGHT 24
 
@@ -48,10 +48,13 @@ typedef struct	s_wolf
 	double		old_time;
 }				t_wolf;
 
+
 /*
 **init.c
 */
 void	init_mlx(t_mlx *mlx);
 void	init_wolf(t_wolf *wolf);
+int		key_hook(int keyvcode);
+
 
 #endif
