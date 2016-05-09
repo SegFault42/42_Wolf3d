@@ -20,7 +20,7 @@ GREY = \033[38;5;60m
 END = \033[0m
 
 NAME = Wolf3d
-FLAG = -Wall -Werror -Wextra -Ofast
+FLAG =  -O3
 FRAMEWORK = -framework OpenGL -framework AppKit
 OBJS = ./main.o \
 	   ./init.o \
