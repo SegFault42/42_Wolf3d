@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/05/10 17:17:02 by rabougue         ###   ########.fr        #
+#    Updated: 2016/05/10 18:30:38 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ GREY = \033[38;5;60m
 END = \033[0m
 ##################################_COMPILATION_#################################
 CC = clang
-FLAG = -Wall -Wextra -Werror -O3
+FLAG = -O3 #-Wall -Wextra -Werror
 LFT = ./libft/libft.a
 LSDL = -L ./libsdl/ -lSDL2
 INCLUDE = -I ./includes/Wolf3d.h -I ./libft/includes/ -I ./includes/SDL2/

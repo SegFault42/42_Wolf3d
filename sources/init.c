@@ -6,54 +6,36 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 11:18:20 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/10 12:47:51 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/10 18:54:17 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Wolf3d.h"
 
-void	init_mlx(t_mlx *mlx)
+int	init_sdl(t_init_sdl *sdl)
 {
-	mlx->mlx_ptr = mlx_init();
-	mlx->img_ptr = mlx_new_image(mlx->mlx_ptr, 1920, 1080);
-	mlx->data = mlx_get_data_addr(mlx->img_ptr, &mlx->bpp,
-		&mlx->sizeline, &mlx->endian);
-	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, 1920, 1080, "Wolf3d");
-}
-
-void	init_wolf(t_wolf *wolf)
-{
-	wolf->pos_x = 22;
-	wolf->pos_y = 12;
-	wolf->dir_x = -1;
-	wolf->dir_y = 0;
-	wolf->plane_x = 0;
-	wolf->plane_y = 0.66;
-	wolf->time = 0;
-	wolf->old_time = 0;
-}
-
-int		key_hook(int keycode)
-{
-	if (keycode == KEY_ESC)
-		exit(EXIT_SUCCESS);
-	return (0);
-}
-
-void	ft_pixel_put_to_image_colors(t_mlx *mlx)
-{
-	if (mlx->endian == 0)
+	
+	SDL_Init(SDL_INIT_EVERYTHING);
+	sdl->mainWindow = SDL_CreateWindow("Wolf3d", SDL_WINDOWPOS_CENTERED,
+			SDL_WINDOWPOS_CENTERED, 1920, 1080, SDL_WINDOW_OPENGL);
+	if (!sdl->mainWindow)
 	{
-		mlx->data[mlx->y * mlx->sizeline + mlx->x * mlx->bpp / 8 + 2] = mlx->r;
-		mlx->data[mlx->y * mlx->sizeline + mlx->x * mlx->bpp / 8 + 1] = mlx->g;
-		mlx->data[mlx->y * mlx->sizeline + mlx->x * mlx->bpp / 8 + 0] = mlx->b;
-		mlx->data[mlx->y * mlx->sizeline + mlx->x * mlx->bpp / 8 + 3] = 0x00;
+		ft_putendl("Unable to create window");
+		return (EXIT_FAILURE);
 	}
-	else
-	{
-		mlx->data[mlx->y * mlx->sizeline + mlx->x * mlx->bpp / 8 + 2] = mlx->b;
-		mlx->data[mlx->y * mlx->sizeline + mlx->x * mlx->bpp / 8 + 1] = mlx->g;
-		mlx->data[mlx->y * mlx->sizeline + mlx->x * mlx->bpp / 8 + 0] = mlx->r;
-		mlx->data[mlx->y * mlx->sizeline + mlx->x * mlx->bpp / 8 + 3] = 0x00;
-	}
+	sdl->mainContext = SDL_GL_CreateContext(sdl->mainWindow);
+	/*SetOpenGLAttributes();*/
+	SDL_GL_SetSwapInterval(1);
+	/*glewExperimental = GL_TRUE;*/
+	/*glewInit();*/
+	return (EXIT_SUCCESS);
+}
+
+int	SetOpenGLAttributes()
+{
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 12:52:14 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/10 14:50:53 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/10 18:45:13 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,47 +19,13 @@
 # include "../libft/includes/libft.h"
 # include "./SDL2/SDL.h"
 
-//# define W 512
-//# define H 384
-# define MAPWIDTH 24
-# define MAPHEIGHT 24
-
-typedef struct	s_mlx
+typedef struct		s_init_sdl
 {
-	void		*win_ptr;
-	void		*mlx_ptr;
-	void		*img_ptr;
-	char		*data;
-	int			bpp;
-	int			sizeline;
-	int			endian;
-	int			x;
-	int			y;
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-	unsigned char	o;
-}				t_mlx;
+	SDL_Window		*mainWindow;
+	SDL_GLContext	mainContext;
+}					t_init_sdl;
 
-typedef struct	s_wolf
-{
-	double		pos_x;
-	double		pos_y;
-	double		dir_x;
-	double		dir_y;
-	double		plane_x;
-	double		plane_y;
-	double		time;
-	double		old_time;
-}				t_wolf;
-
-
-/*
-**init.c
-*/
-void	init_mlx(t_mlx *mlx);
-void	init_wolf(t_wolf *wolf);
-int		key_hook(int keyvcode);
-void	ft_pixel_put_to_image_colors(t_mlx *mlx);
+int	init_sdl(t_init_sdl *sdl);
+int	SetOpenGLAttributes();
 
 #endif
