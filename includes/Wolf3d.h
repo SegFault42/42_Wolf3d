@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 12:52:14 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/10 00:05:46 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/10 14:50:53 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@
 # include <stdio.h> // a supprimer.
 # include <stdlib.h>
 # include <math.h>
-# include "../minilibx_macos/mlx.h"
 # include "../libft/includes/libft.h"
-# include "./keyboard.h"
+# include "./SDL2/SDL.h"
 
 //# define W 512
 //# define H 384
@@ -34,6 +33,12 @@ typedef struct	s_mlx
 	int			bpp;
 	int			sizeline;
 	int			endian;
+	int			x;
+	int			y;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+	unsigned char	o;
 }				t_mlx;
 
 typedef struct	s_wolf
@@ -55,6 +60,6 @@ typedef struct	s_wolf
 void	init_mlx(t_mlx *mlx);
 void	init_wolf(t_wolf *wolf);
 int		key_hook(int keyvcode);
-
+void	ft_pixel_put_to_image_colors(t_mlx *mlx);
 
 #endif

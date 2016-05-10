@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/05/09 15:01:55 by rabougue         ###   ########.fr        #
+#    Updated: 2016/05/10 14:30:09 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c ft_memchr.c\
 	  ft_strcmp_ext.c
 
 OBJS = $(SRC:.c=.o)
+CC = clang
 
 HEAD = ./includes/
 
@@ -35,7 +36,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 #	@echo "\033[33mCompiling in .o ...\033[0m"
-	@gcc -Wall -Wextra -Werror -c $(SRC) -I $(HEAD)
+	@$(CC) -Wall -Wextra -Werror -c $(SRC) -I $(HEAD)
 #	@echo "\033[33mCreating library ...\033[0m"
 	@ar rc $(NAME) $(OBJS)
 #	@echo "\033[33mIndexing library ...\033[0m"
