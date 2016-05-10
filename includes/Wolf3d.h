@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 12:52:14 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/10 18:45:13 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/10 20:31:13 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,28 @@
 # include <math.h>
 # include "../libft/includes/libft.h"
 # include "./SDL2/SDL.h"
+# include "./SDL2/SDL_opengl.h"
 
-typedef struct		s_init_sdl
+# define GL3_PROTOTYPES 1
+# define TRUE 1
+# define FALSE 0
+
+
+typedef struct		s_sdl
 {
 	SDL_Window		*mainWindow;
 	SDL_GLContext	mainContext;
-}					t_init_sdl;
-
-int	init_sdl(t_init_sdl *sdl);
-int	SetOpenGLAttributes();
+}					t_sdl;
+/*
+** init.c
+*/
+int		init_sdl(t_sdl *sdl);
+int		SetOpenGLAttributes();
+/*
+** draw.c
+*/
+void	run_wolf(t_sdl *sdl);
+void	clean_up(t_sdl *sdl);
+void	check_sdl_error(int line);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/05/10 18:30:38 by rabougue         ###   ########.fr        #
+#    Updated: 2016/05/10 20:29:53 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,14 +21,15 @@ LFT = ./libft/libft.a
 LSDL = -L ./libsdl/ -lSDL2
 INCLUDE = -I ./includes/Wolf3d.h -I ./libft/includes/ -I ./includes/SDL2/
 OBJS = ./main.o \
-	   #./init.o \
+	   ./init.o \
+	   ./draw.o
 
 NAME = Wolf3d
 FRAMEWORK = -framework OpenGL
 ##################################_CHANGE_PATH_#################################
 SDL = ./libsdl/libSDL2-2.0.0.dylib
 ##################################_RELINK_MODIFY_.h#############################
-RELINK_H = ./includes/Wolf3d.h ./includes/keyboard.h
+RELINK_H = ./includes/Wolf3d.h
 
 VPATH = sources/
 
@@ -45,7 +46,7 @@ $(NAME): $(OBJS)
 	@printf "                    [$(GREEN)Success$(GREY)]\n$(END)"
 	@install_name_tool -change /usr/local/lib/libSDL2-2.0.0.dylib $(SDL) $(NAME)
 
-%.o : %.c $(RELINK_H)
+%.o : %.c ${RELINK_H}
 	@$(CC) -c $(FLAG) $< -o $@
 
 clean:
