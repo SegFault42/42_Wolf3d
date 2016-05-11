@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 12:52:14 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/11 18:09:22 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/11 18:20:58 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 typedef struct	s_sdl_win
 {
 	SDL_Window		*win;
-	SDL_Renderer	*renderer;
+	SDL_Renderer	*render;
 	int				loop;
 }				t_sdl_win;
 
