@@ -6,25 +6,12 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 17:40:10 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/12 00:02:41 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/12 13:58:45 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Wolf3d.h"
 
-int	init_window(char *win_name, int width, int height, t_sdl_win *win)
-{
-	win->loop = 1;
-	SDL_Init(SDL_INIT_VIDEO);
-	win->win = SDL_CreateWindow(win_name, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL);
-	if (win->win == NULL)
-	{
-		ft_putstr("Could not create window.");
-		exit (1);
-	}
-	win->render = SDL_CreateRenderer(win->win, -1, SDL_RENDERER_SOFTWARE);
-	return (0);
-}
 
 void	close_window(t_sdl_win *win)
 {
@@ -33,11 +20,17 @@ void	close_window(t_sdl_win *win)
 	SDL_Quit();
 }
 
+void	key_event(t_sdl_win *win, t_sdl_event *event)
+{
+
+}
+
 int main(int argc, char **argv)
 {
 	t_sdl_win	win;
 	SDL_Rect	rectangle;
 	SDL_Event	event;
+	t_init		init;
 	int world_map[MAPWIDTH][MAPHEIGHT]=
 		{
 			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -65,126 +58,132 @@ int main(int argc, char **argv)
 			{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 		};
-
-	win.width = 800;
-	win.height = 600;
-	double	pos_x = 22;
-	double	pos_y = 12;
-	double	dir_x = -1;
-	double	dir_y = 0;
-	double	plane_x = 0;
-	double	plane_y = 0.66;
-	double	time = 0;
-	double	ols_time = 0;
+	win.width = 1280;
+	win.height = 720;
+	double	frame_time = (init.time - init.old_time) / 1000;
+	double	move_speed = frame_time * 5.0;
+	double	rot_speed = frame_time * 3.0;
 	init_window("Wolf3d", win.width, win.height, &win);
 	while (win.loop)
 	{
-		while (SDL_PollEvent(&event))
+		/*printf("dir_y = %f\n", init.dir_y);*/
+		while(init.x < win.width)
 		{
-			if (event.type == SDL_QUIT)
-				win.loop = 0;
-		}
-		for (int x = 0; x < win.width; x++)
-		{
-			double	camera_x = 2 * x / (double)win.width - 1;
-			double	ray_pos_x = pos_x;
-			double	ray_pos_y = pos_y;
-			double	ray_dir_x = dir_x + plane_x * camera_x;
-			double	ray_dir_y = dir_y + plane_y * camera_x;
-			int		map_x = (int)ray_pos_x;
-			int		map_y = (int)ray_pos_y;
-			double	dist_mur_x;
-			double	dist_mur_y;
-			double	dist2mur_x = sqrt(1 + (ray_dir_y * ray_dir_y) / (ray_dir_x * ray_dir_x));
-			double	dist2mur_y = sqrt(1 + (ray_dir_x * ray_dir_x) / (ray_dir_y * ray_dir_y));
-			double	longeur_mur;
-			int		etape_x;
-			int		etape_y;
-			int		touche = 0;
-			int		mur_ver_or_hor;
-			if (ray_dir_x < 0)
+			init_map(&init);
+			init.camera_x = 2 * init.x / (double)win.width - 1;
+			if (init.ray_dir_x < 0)
 			{
-				etape_x = -1;
-				dist_mur_x = (map_x - ray_pos_x) * dist2mur_x;
+				init.etape_x = -1;
+				init.dist_mur_x = (init.map_x - init.ray_pos_x) * init.dist2mur_x;
 			}
 			else
 			{
-				etape_x = 1;
-				dist_mur_x = (map_x + 1.0 - ray_pos_x) * dist2mur_x;
+				init.etape_x = 1;
+				init.dist_mur_x = (init.map_x + 1.0 - init.ray_pos_x) * init.dist2mur_x;
 			}
-			if (ray_dir_y < 0)
+			if (init.ray_dir_y < 0)
 			{
-				etape_y = -1;
-				dist_mur_y = (ray_pos_y - map_y) * dist2mur_y;
+				init.etape_y = -1;
+				init.dist_mur_y = (init.ray_pos_y - init.map_y) * init.dist2mur_y;
 			}
 			else
 			{
-				etape_y = 1;
-				dist_mur_y = (map_y + 1.0 - ray_pos_y) * dist2mur_y;
+				init.etape_y = 1;
+				init.dist_mur_y = (init.map_y + 1.0 - init.ray_pos_y) * init.dist2mur_y;
 			}
-			while (touche == 0)
+			while (init.touche == 0)
 			{
-				if (dist_mur_x < dist_mur_y)
+				if (init.dist_mur_x < init.dist_mur_y)
 				{
-					dist_mur_x += dist2mur_x;
-					map_x += etape_x;
-					mur_ver_or_hor = 0;
+					init.dist_mur_x += init.dist2mur_x;
+					init.map_x += init.etape_x;
+					init.mur_ver_or_hor = 0;
 				}
 				else
 				{
-					dist_mur_y += dist2mur_y;
-					map_y += etape_y;
-					mur_ver_or_hor = 1;
+					init.dist_mur_y += init.dist2mur_y;
+					init.map_y += init.etape_y;
+					init.mur_ver_or_hor = 1;
 				}
-				if (world_map[map_x][map_y] > 0)
-					touche = 1;
-				if (mur_ver_or_hor == 0)
-					longeur_mur = fabs((map_x - ray_pos_x + (1 - etape_x) / 2) / ray_dir_x);
+				if (world_map[init.map_x][init.map_y] > 0)
+					init.touche = 1;
+				if (init.mur_ver_or_hor == 0)
+					init.longeur_mur = (init.map_x - init.ray_pos_x + (1 - init.etape_x) / 2) / init.ray_dir_x;
 				else
-					longeur_mur = fabs((map_y - ray_pos_y + (1 - etape_y) / 2) / ray_dir_y);
-				int	hauteur_mur = abs((int)(win.height / longeur_mur));
+					init.longeur_mur = (init.map_y - init.ray_pos_y + (1 - init.etape_y) / 2) / init.ray_dir_y;
+				int	hauteur_mur = (int)(win.height / init.longeur_mur);
 				int	draw_start = -hauteur_mur / 2 + win.height / 2;
 				if (draw_start < 0)
 					draw_start = 0;
 				int	draw_end = hauteur_mur / 2 + win.height / 2;
 				if (draw_end >= win.height)
 					draw_end = win.height -1;
-				/*Uint8 color_r;*/
-				/*Uint8 color_g;*/
-				/*Uint8 color_b;*/
-				/*unsigned char red = 255;*/
-				/*unsigned char green = 255;*/
-				/*unsigned char blue = 255;*/
-				/*unsigned char red = 255;*/
-				switch (world_map[map_x][map_y])
+				unsigned char red;
+				unsigned char green;
+				unsigned char blue;
+				switch (world_map[init.map_x][init.map_y])
 				{
 					case 1:
-						SDL_SetRenderDrawColor(win.render, 255, 0, 0, 255);
+						red = 255;
+						green = 0;
+						blue = 0;
+						SDL_SetRenderDrawColor(win.render, red, green, blue, 255);
 						break;
 					case 2:
-						SDL_SetRenderDrawColor(win.render, 0, 255, 0, 255);
+						red = 0;
+						green = 255;
+						blue = 0;
+						SDL_SetRenderDrawColor(win.render, red, green, blue, 255);
 						break;
 					case 3:
-						SDL_SetRenderDrawColor(win.render, 0, 0, 255, 255);
+						red = 0;
+						green = 0;
+						blue = 255;
+						SDL_SetRenderDrawColor(win.render, red, green, blue, 255);
 						break;
 					case 4:
-						SDL_SetRenderDrawColor(win.render, 255, 255, 255, 255);
+						red = 255;
+						green = 255;
+						blue = 255;
+						SDL_SetRenderDrawColor(win.render, red, green, blue, 255);
 						break;
 					default:
-						SDL_SetRenderDrawColor(win.render, 255, 255, 0, 255);
+						red = 100;
+						green = 100;
+						blue = 100;
+						SDL_SetRenderDrawColor(win.render, red, green, blue, 255);
 						break;
 				}
-				/*if (mur_ver_or_hor == 1)*/
-				/*{*/
-					/*color /= 2;*/
-				/*}*/
-					SDL_RenderDrawLine(win.render, x, draw_start, x, draw_end);
-					SDL_RenderPresent(win.render);
+				if (init.mur_ver_or_hor == 1)
+				{
+					ft_debug();
+					red /= 2;
+					green /= 2;
+					blue /= 2;
+				}
+					SDL_RenderDrawLine(win.render, init.x, draw_start, init.x, draw_end);
+			}
+			init.x++;
+		}
+		while (SDL_PollEvent(&event))
+		{
+			if (event.type == SDL_QUIT)
+				win.loop = 0;
+			if (SDL_KEYDOWN)
+			{
+				if (event.key.keysym.sym == SDLK_ESCAPE)
+					win.loop = 0;
+				if (event.key.keysym.sym == SDLK_UP)
+				{
+					if (world_map[(int)(init.pos_x + init.dir_x *move_speed)][(int)init.pos_y] == 1)
+						init.pos_x += init.dir_x * move_speed;
+					if (world_map[(int)init.pos_x][(int)(init.pos_y + init.dir_y * move_speed)] == 1)
+						init.pos_y += init.dir_y * move_speed;
+				}
 			}
 		}
+			SDL_RenderPresent(win.render);
 	}
-	SDL_RenderFillRect(win.render, &rectangle);
-	SDL_RenderPresent(win.render);
 	close_window(&win);
 	return (0);
 }
