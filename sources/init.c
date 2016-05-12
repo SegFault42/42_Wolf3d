@@ -6,24 +6,20 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 11:18:20 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/12 15:12:36 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/12 20:59:25 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Wolf3d.h"
 
-int	init_window(char *win_name, int width, int height, t_sdl_win *win)
+void	init_mlx(t_mlx *mlx)
 {
-	win->loop = 1;
-	SDL_Init(SDL_INIT_VIDEO);
-	win->win = SDL_CreateWindow(win_name, 0, 0, width, height, SDL_WINDOW_OPENGL);
-	if (win->win == NULL)
-	{
-		ft_putstr("Could not create window.");
-		exit (1);
-	}
-	win->render = SDL_CreateRenderer(win->win, -1, SDL_RENDERER_SOFTWARE);
-	return (0);
+	mlx->height = 500;
+	mlx->width = 500;
+	mlx->mlx_ptr = mlx_init();
+	mlx->img_ptr = mlx_new_image(mlx->mlx_ptr, mlx->width, mlx->height);
+	mlx->data = mlx_get_data_addr(mlx->img_ptr, &mlx->bpp, &mlx->sizeline, &mlx->endian);
+	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, mlx->width, mlx->height, "Wolf3d");
 }
 
 void	init_map(t_init *init)

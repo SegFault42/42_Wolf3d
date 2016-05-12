@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 12:52:14 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/12 19:35:04 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/12 21:47:46 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,30 @@
 # include <stdlib.h>
 # include <math.h>
 # include "../libft/includes/libft.h"
-# include "./SDL2/SDL.h"
-//# include "./SDL2/SDL_opengl.h"
+# include "../minilibx_macos/mlx.h"
 
 # define MAPWIDTH 24
 # define MAPHEIGHT 24
 
-typedef struct		s_sdl_win
+typedef struct		s_mlx
 {
-	SDL_Window		*win;
-	SDL_Renderer	*render;
-	int				loop;
 	int				width;
 	int				height;
-}					t_sdl_win;
-
-typedef struct		s_sdl_event
-{
-	SDL_Event		event;
-}					t_sdl_event;
+	int				x;
+	int				y;
+	void			*mlx_ptr;
+	void			*win_ptr;
+	void			*img_ptr;
+	unsigned long	img_color;
+	char			*data;
+	int				sizeline;
+	int				endian;
+	int				bpp;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+	unsigned char	o;
+}					t_mlx;
 
 typedef struct		s_init
 {
@@ -72,12 +77,11 @@ typedef struct		s_init
 	unsigned char	blue;
 }					t_init;
 
-/*
-** init.c
-*/
-void				init_map(t_init *init);
-int					init_window(char *win_name, int width, int height,
-					t_sdl_win *win);
+void	init_mlx(t_mlx *mlx);
+void	init_map(t_init *init);
+void	calc_dir(t_init *init);
+void	dda(t_init *init);
+void	dist_cam_dir(t_init *init, t_mlx *mlx);
+void	ft_pixel_put_to_image_colors(t_mlx *mlx);
 
-void				close_window(t_sdl_win *win);
 #endif
