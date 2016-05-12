@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 12:52:14 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/12 13:50:06 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/12 19:35:04 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,12 @@ typedef struct		s_init
 	double			dist2mur_x;
 	double			dist2mur_y;
 	double			longeur_mur;
-	
+	int				hauteur_mur;
+	int				draw_start;
+	int				draw_end;
+	unsigned char	red;
+	unsigned char	green;
+	unsigned char	blue;
 }					t_init;
 
 /*
