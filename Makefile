@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/05/12 20:53:57 by rabougue         ###   ########.fr        #
+#    Updated: 2016/05/12 23:13:32 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,9 @@ FLAG = -Ofast
 FRAMEWORK = -framework OpenGL -framework AppKit
 OBJS = ./main.o \
 	   ./init.o \
+	   ./draw.o \
+	   ./pixel_to_img.o \
+	   ./wolf.o
 
 INCLUDE = $(wildcard ./includes/Wolf3d.h ./includes/keyboard.h)
 

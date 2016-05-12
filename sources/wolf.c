@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 21:39:46 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/12 21:51:11 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/12 23:12:09 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,37 +106,44 @@ void	draw(t_init *init, t_mlx *mlx)
 {
 	if (world_map[init->map_x][init->map_y] == 1)
 	{
-		init->red = 255;
-		init->green = 0;
-		init->blue = 0;
-		SDL_SetRenderDrawColor(win->render, init->red, init->green, init->blue, 255);
+		mlx->r = 255;
+		mlx->g = 0;
+		mlx->b = 0;
+		ft_pixel_put_to_image_colors(mlx);
 	}
 	else if (world_map[init->map_x][init->map_y] == 2)
 	{
-		init->red = 0;
-		init->green = 255;
-		init->blue = 0;
-		SDL_SetRenderDrawColor(win->render, init->red, init->green, init->blue, 255);
+		mlx->r = 0;
+		mlx->g = 255;
+		mlx->b = 0;
+		ft_pixel_put_to_image_colors(mlx);
 	}
 	else if (world_map[init->map_x][init->map_y] == 3)
 	{
-		init->red = 0;
-		init->green = 0;
-		init->blue = 255;
-		SDL_SetRenderDrawColor(win->render, init->red, init->green, init->blue, 255);
+		mlx->r = 0;
+		mlx->g = 0;
+		mlx->b = 255;
+		ft_pixel_put_to_image_colors(mlx);
 	}
 	else if (world_map[init->map_x][init->map_y] == 4)
 	{
-		init->red = 255;
-		init->green = 255;
-		init->blue = 255;
-		SDL_SetRenderDrawColor(win->render, init->red, init->green, init->blue, 255);
+		mlx->r = 0;
+		mlx->g = 0;
+		mlx->b = 0;
+		ft_pixel_put_to_image_colors(mlx);
 	}
 	else
 	{
-		init->red = 100;
-		init->green = 100;
-		init->blue = 100;
-		SDL_SetRenderDrawColor(win->render, init->red, init->green, init->blue, 255);
+		mlx->r = 255;
+		mlx->g = 255;
+		mlx->b = 0;
+		ft_pixel_put_to_image_colors(mlx);
 	}
+	if (init->touche == 1)
+	{
+		mlx->r /= 2;
+		mlx->g /= 2;
+		mlx->b /= 2;
+	}
+	ft_debug();
 }

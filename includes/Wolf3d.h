@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 12:52:14 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/12 21:47:46 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/12 22:45:15 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 
 # define MAPWIDTH 24
 # define MAPHEIGHT 24
+#define W 500
+#define H 500
 
 typedef struct		s_mlx
 {
@@ -83,5 +85,6 @@ void	calc_dir(t_init *init);
 void	dda(t_init *init);
 void	dist_cam_dir(t_init *init, t_mlx *mlx);
 void	ft_pixel_put_to_image_colors(t_mlx *mlx);
+void	draw(t_init *init, t_mlx *mlx);
 
 #endif
