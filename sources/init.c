@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 11:18:20 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/13 22:49:50 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/14 00:22:53 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,27 +27,3 @@ int	init_window(char *win_name, int width, int height, t_sdl_win *win)
 	return (0);
 }
 
-void	init_pos(t_init *init)
-{
-	init->pos_x = 22;
-	init->pos_y = 12;
-	init->dir_x = -1;
-	init->dir_y = 0;
-	init->plane_x = 0;
-	init->plane_y = 0.66;
-}
-
-void	init_map(t_init *init)
-{
-	init->ray_pos_x = init->pos_x;
-	init->ray_pos_y = init->pos_y;
-	init->ray_dir_x = init->dir_x + init->plane_x * init->camera_x;
-	init->ray_dir_y = init->dir_y + init->plane_y * init->camera_x;
-	init->map_x = (int)init->ray_pos_x;
-	init->map_y = (int)init->ray_pos_y;
-	init->side_dist_x = sqrt(1 + (init->ray_dir_y * init->ray_dir_y) /
-			(init->ray_dir_x * init->ray_dir_x));
-	init->side_dist_y = sqrt(1 + (init->ray_dir_x * init->ray_dir_x) /
-			(init->ray_dir_y * init->ray_dir_y));
-	init->hit = 0;
-}
