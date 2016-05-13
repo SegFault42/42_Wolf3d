@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/05/10 20:29:53 by rabougue         ###   ########.fr        #
+#    Updated: 2016/05/13 18:18:50 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ LSDL = -L ./libsdl/ -lSDL2
 INCLUDE = -I ./includes/Wolf3d.h -I ./libft/includes/ -I ./includes/SDL2/
 OBJS = ./main.o \
 	   ./init.o \
-	   ./draw.o
+	   ./draw.o \
+	   ./raycasting.o \
 
 NAME = Wolf3d
 FRAMEWORK = -framework OpenGL

@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 12:52:14 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/13 13:59:29 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/13 18:39:10 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,23 @@ typedef struct		s_init
 	double			dist2mur_x;
 	double			dist2mur_y;
 	double			longeur_mur;
+	double			move_speed;
+	double			rot_speed;
 	int				hauteur_mur;
 	int				draw_start;
 	int				draw_end;
 	unsigned char	red;
 	unsigned char	green;
 	unsigned char	blue;
+	unsigned char	alpha;
 }					t_init;
 
 /*
 ** init.c
 */
 void				init_map(t_init *init);
+void				calc_dir(t_init *init);
+void				dda(t_init *init, t_sdl_win *win);
 void				init_pos(t_init *init);
 int					init_window(char *win_name, int width, int height,
 					t_sdl_win *win);

@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 17:40:10 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/13 14:01:25 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/13 19:37:18 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,37 +40,6 @@
 			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 		};
 
-void	close_window(t_sdl_win *win)
-{
-	SDL_DestroyRenderer(win->render);
-	SDL_DestroyWindow(win->win);
-	SDL_Quit();
-}
-
-void	calc_dir(t_init *init)
-{
-	if (init->ray_dir_x < 0)
-	{
-		init->etape_x = -1;
-		init->dist_mur_x = (init->map_x - init->ray_pos_x) * init->dist2mur_x;
-	}
-	else
-	{
-		init->etape_x = 1;
-		init->dist_mur_x = (init->map_x + 1.0 - init->ray_pos_x) * init->dist2mur_x;
-	}
-	if (init->ray_dir_y < 0)
-	{
-		init->etape_y = -1;
-		init->dist_mur_y = (init->ray_pos_y - init->map_y) * init->dist2mur_y;
-	}
-	else
-	{
-		init->etape_y = 1;
-		init->dist_mur_y = (init->map_y + 1.0 - init->ray_pos_y) * init->dist2mur_y;
-	}
-}
-
 void	dda(t_init *init, t_sdl_win *win)
 {
 	if (init->dist_mur_x < init->dist_mur_y)
@@ -100,6 +69,14 @@ void	dda(t_init *init, t_sdl_win *win)
 		init->draw_end = win->height -1;
 }
 
+void	close_window(t_sdl_win *win)
+{
+	SDL_DestroyRenderer(win->render);
+	SDL_DestroyWindow(win->win);
+	SDL_Quit();
+}
+
+
 void	draw(t_init *init, t_sdl_win *win)
 {
 	while(init->x < win->width)
@@ -111,47 +88,54 @@ void	draw(t_init *init, t_sdl_win *win)
 		{
 			dda(init, win);
 			if (world_map[init->map_x][init->map_y] == 1)
-				{
-					init->red = 255;
-					init->green = 0;
-					init->blue = 0;
-					SDL_SetRenderDrawColor(win->render, init->red, init->green, init->blue, 255);
-				}
-				else if (world_map[init->map_x][init->map_y] == 2)
-				{
-					init->red = 0;
-					init->green = 255;
-					init->blue = 0;
-					SDL_SetRenderDrawColor(win->render, init->red, init->green, init->blue, 255);
-				}
-				else if (world_map[init->map_x][init->map_y] == 3)
-				{
-					init->red = 0;
-					init->green = 0;
-					init->blue = 255;
-					SDL_SetRenderDrawColor(win->render, init->red, init->green, init->blue, 255);
-				}
-				else if (world_map[init->map_x][init->map_y] == 4)
-				{
-					init->red = 255;
-					init->green = 255;
-					init->blue = 255;
-					SDL_SetRenderDrawColor(win->render, init->red, init->green, init->blue, 255);
-				}
-				else
-				{
-					init->red = 100;
-					init->green = 100;
-					init->blue = 100;
-					SDL_SetRenderDrawColor(win->render, init->red, init->green, init->blue, 255);
-				}
-					SDL_RenderDrawLine(win->render, init->x, init->draw_start, init->x, init->draw_end);
-					/*SDL_RenderDrawPoint(win.render, init.x, draw_start);*/
-					/*SDL_RenderDrawPoint(win.render, init.x, draw_end);*/
+			{
+				init->red = 255;
+				init->green = 0;
+				init->blue = 0;
+				init->alpha = 255;
 			}
+			else if (world_map[init->map_x][init->map_y] == 2)
+			{
+				init->red = 0;
+				init->green = 255;
+				init->blue = 0;
+				init->alpha = 255;
+			}
+			else if (world_map[init->map_x][init->map_y] == 3)
+			{
+				init->red = 0;
+				init->green = 0;
+				init->blue = 255;
+				init->alpha = 255;
+			}
+			else if (world_map[init->map_x][init->map_y] == 4)
+			{
+				init->red = 255;
+				init->green = 255;
+				init->blue = 255;
+				init->alpha = 255;
+			}
+			else
+			{
+				init->red = 0;
+				init->green = 0;
+				init->blue = 0;
+				init->alpha = 255;
+			}
+			/*if (init->touche == 1)*/
+			/*{*/
+				/*init->red /= 2;*/
+				/*init->green /= 2;*/
+				/*init->blue /= 2;*/
+			/*}*/
+				SDL_SetRenderDrawColor(win->render, init->red, init->green, init->blue, 255);
+				SDL_RenderDrawLine(win->render, init->x, init->draw_start, init->x, init->draw_end);
+		}
 		init->x++;
 	}
 	init->x = 0;
+	init->move_speed = 1;
+	init->rot_speed = 0.05;
 }
 
 void	sdl_clear(t_sdl_win *win)
@@ -161,11 +145,75 @@ void	sdl_clear(t_sdl_win *win)
 	SDL_RenderPresent(win->render);
 }
 
+void	move(t_sdl_win *win, t_init *init, SDL_Event *event)
+{
+	if (event->key.keysym.sym == SDLK_w)
+	{
+		draw(init, win);
+		if (world_map[(int)(init->pos_x + init->dir_x * init->move_speed)][(int)init->pos_y] == 0)
+			init->pos_x += init->dir_x * init->move_speed;
+	if (world_map[(int)init->pos_x][(int)(init->pos_y + init->dir_y * init->move_speed)] == 0)
+		init->pos_y += init->dir_y * init->move_speed;
+		SDL_RenderPresent(win->render);
+	}
+	if (event->key.keysym.sym == SDLK_s)
+	{
+		draw(init, win);
+		if (world_map[(int)(init->pos_x - init->dir_x * init->move_speed)][(int)init->pos_y] == 0)
+			init->pos_x -= init->dir_x * init->move_speed;
+		if (world_map[(int)init->pos_x][(int)(init->pos_y - init->dir_y * init->move_speed)] == 0)
+			init->pos_y -= init->dir_y * init->move_speed;
+		SDL_RenderPresent(win->render);
+	}
+}
+
+void	rotation(t_sdl_win *win, t_init *init, SDL_Event *event)
+{
+	if (event->key.keysym.sym == SDLK_d)
+	{
+		draw(init, win);
+		double old_dir_x = init->dir_x;
+		init->dir_x = init->dir_x * cos(-init->rot_speed) - init->dir_y * sin(-init->rot_speed);
+		init->dir_y = old_dir_x * sin(-init->rot_speed) + init->dir_y * cos(-init->rot_speed);
+		double old_plane_x = init->plane_x;
+		init->plane_x = init->plane_x * cos(-init->rot_speed) - init->plane_y *sin(-init->rot_speed);
+		init->plane_y = old_plane_x * sin(-init->rot_speed) + init->plane_y * cos(-init->rot_speed);
+		SDL_RenderPresent(win->render);
+	}
+	if (event->key.keysym.sym == SDLK_a)
+	{
+		draw(init, win);
+		double old_dir_x = init->dir_x;
+		init->dir_x = init->dir_x * cos(init->rot_speed) - init->dir_y * sin(init->rot_speed);
+		init->dir_y = old_dir_x * sin(init->rot_speed) + init->dir_y * cos(init->rot_speed);
+		double old_plane_x = init->plane_x;
+		init->plane_x = init->plane_x * cos(init->rot_speed) - init->plane_y *sin(init->rot_speed);
+		init->plane_y = old_plane_x * sin(init->rot_speed) + init->plane_y * cos(init->rot_speed);
+		SDL_RenderPresent(win->render);
+	}
+}
+
+void	keyboard(t_sdl_win *win, t_init *init)
+{
+	SDL_Event	event;
+	while (SDL_PollEvent(&event))
+	{
+		if (event.type == SDL_QUIT)
+			win->loop = 0;
+		if (SDL_KEYDOWN)
+		{
+			if (event.key.keysym.sym == SDLK_ESCAPE)
+				win->loop = 0;
+			move(win, init, &event);
+			rotation(win, init, &event);
+		}
+	}
+}
+
 int main(int argc, char **argv)
 {
 	t_sdl_win	win;
 	SDL_Rect	rectangle;
-	SDL_Event	event;
 	t_init		init;
 
 	win.width = 1280;
@@ -175,31 +223,8 @@ int main(int argc, char **argv)
 	while (win.loop)
 	{
 		draw(&init, &win);
-		while (SDL_PollEvent(&event))
-		{
-			if (event.type == SDL_QUIT)
-				win.loop = 0;
-			if (SDL_KEYDOWN)
-			{
-				if (event.key.keysym.sym == SDLK_ESCAPE)
-					win.loop = 0;
-				if (event.key.keysym.sym == SDLK_SPACE)
-					sdl_clear(&win);
-				if (event.key.keysym.sym == SDLK_UP)
-				{
-					draw(&init, &win);
-					init.dir_x *= 1.1;
-					SDL_RenderPresent(win.render);
-				}
-				if (event.key.keysym.sym == SDLK_DOWN)
-				{
-					draw(&init, &win);
-					init.dir_x /= 1.1;
-					SDL_RenderPresent(win.render);
-				}
-			}
-		}
-		/*SDL_RenderPresent(win.render);*/
+		keyboard(&win, &init);
+		SDL_RenderPresent(win.render);
 	}
 	close_window(&win);
 	return (0);
