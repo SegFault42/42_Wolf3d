@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 12:52:14 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/12 19:35:04 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/13 13:59:29 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct		s_init
 ** init.c
 */
 void				init_map(t_init *init);
+void				init_pos(t_init *init);
 int					init_window(char *win_name, int width, int height,
 					t_sdl_win *win);
 

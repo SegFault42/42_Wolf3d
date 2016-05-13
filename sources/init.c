@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 11:18:20 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/12 15:12:36 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/13 13:59:33 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	init_window(char *win_name, int width, int height, t_sdl_win *win)
 	return (0);
 }
 
-void	init_map(t_init *init)
+void	init_pos(t_init *init)
 {
 	init->pos_x = 22;
 	init->pos_y = 12;
@@ -36,6 +36,10 @@ void	init_map(t_init *init)
 	init->plane_y = 0.6;
 	init->time = 0;
 	init->old_time = 0;
+}
+
+void	init_map(t_init *init)
+{
 	init->ray_pos_x = init->pos_x;
 	init->ray_pos_y = init->pos_y;
 	init->ray_dir_x = init->dir_x + init->plane_x * init->camera_x;
@@ -47,4 +51,8 @@ void	init_map(t_init *init)
 	init->dist2mur_y = sqrt(1 + (init->ray_dir_x * init->ray_dir_x) /
 			(init->ray_dir_y * init->ray_dir_y));
 	init->touche = 0;
+}
+
+void	init_map_2(t_init *init)
+{
 }
