@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 12:52:14 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/13 18:39:10 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/13 22:41:03 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,31 +42,27 @@ typedef struct		s_init
 	int				x;
 	int				map_x;
 	int				map_y;
-	int				etape_x;
-	int				etape_y;
-	int				touche;
-	int				mur_ver_or_hor;
+	int				step_x;
+	int				step_y;
+	int				hit;
+	int				side;
 	double			pos_x;
 	double			pos_y;
 	double			dir_x;
 	double			dir_y;
 	double			plane_x;
 	double			plane_y;
-	double			time;
-	double			old_time;
 	double			camera_x;
 	double			ray_pos_x;
 	double			ray_pos_y;
 	double			ray_dir_x;
 	double			ray_dir_y;
-	double			dist_mur_x;
-	double			dist_mur_y;
-	double			dist2mur_x;
-	double			dist2mur_y;
-	double			longeur_mur;
+	double			side_dist_x;
+	double			side_dist_y;
+	double			perp_wall_dist;
 	double			move_speed;
 	double			rot_speed;
-	int				hauteur_mur;
+	int				line_height;
 	int				draw_start;
 	int				draw_end;
 	unsigned char	red;

@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 18:14:23 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/13 18:20:00 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/13 22:42:19 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,23 @@ void	calc_dir(t_init *init)
 {
 	if (init->ray_dir_x < 0)
 	{
-		init->etape_x = -1;
-		init->dist_mur_x = (init->map_x - init->ray_pos_x) * init->dist2mur_x;
+		init->step_x = -1;
+		init->side_dist_x = (init->map_x - init->ray_pos_x) * init->side_dist_x;
 	}
 	else
 	{
-		init->etape_x = 1;
-		init->dist_mur_x = (init->map_x + 1.0 - init->ray_pos_x) * init->dist2mur_x;
+		init->step_x = 1;
+		init->side_dist_x = (init->map_x + 1.0 - init->ray_pos_x) * init->side_dist_x;
 	}
 	if (init->ray_dir_y < 0)
 	{
-		init->etape_y = -1;
-		init->dist_mur_y = (init->ray_pos_y - init->map_y) * init->dist2mur_y;
+		init->step_y = -1;
+		init->side_dist_y = (init->ray_pos_y - init->map_y) * init->side_dist_y;
 	}
 	else
 	{
-		init->etape_y = 1;
-		init->dist_mur_y = (init->map_y + 1.0 - init->ray_pos_y) * init->dist2mur_y;
+		init->step_y = 1;
+		init->side_dist_y = (init->map_y + 1.0 - init->ray_pos_y) * init->side_dist_y;
 	}
 }
 
