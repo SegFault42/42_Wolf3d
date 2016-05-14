@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 11:45:06 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/14 12:24:06 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/14 14:40:21 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,30 @@ void	calc_ray(t_wolf *wolf, t_init *init)
 	wolf->draw_end = wolf->line_height / 2 + init->height / 2;
 	if (wolf->draw_end >= init->height)
 		wolf->draw_end = init->height -1;
+}
+
+void	color(t_wolf *wolf)
+{
+	if (world_map((wolf->map_x), (wolf->map_y)) == 1)
+		red(wolf);
+	else if (world_map((wolf->map_x), (wolf->map_y)) == 2)
+		green(wolf);
+	else if (world_map((wolf->map_x), (wolf->map_y)) == 3)
+		blue(wolf);
+	else if (world_map((wolf->map_x), (wolf->map_y)) == 4)
+		white(wolf);
+	else
+		defaut(wolf);
+	if (wolf->side == 1)
+	{
+		wolf->red /= 2;
+		wolf->green /= 2;
+		wolf->blue /= 2;
+	}
+}
+
+void	render(t_wolf *wolf, t_win *win, t_init *init)
+{
+	SDL_SetRenderDrawColor(win->render, wolf->red, wolf->green, wolf->blue, 255);
+	SDL_RenderDrawLine(win->render, init->x, wolf->draw_start, init->x, wolf->draw_end);
 }

@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 17:40:10 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/14 12:24:10 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/14 14:40:19 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,53 +63,8 @@ int main(int argc, char **argv)
 			{
 				dda(&wolf);
 				calc_ray(&wolf, &init);
-				unsigned char	red;
-				unsigned char	green;
-				unsigned char	blue;
-				unsigned char	alpha;
-				if (world_map((wolf.map_x), (wolf.map_y)) == 1)
-				{
-					red = 255;
-					green = 0;
-					blue = 0;
-					alpha = 255;
-				}
-				else if (world_map((wolf.map_x), (wolf.map_y)) == 2)
-				{
-					red = 0;
-					green = 255;
-					blue = 0;
-					alpha = 255;
-				}
-				else if (world_map((wolf.map_x), (wolf.map_y)) == 3)
-				{
-					red = 0;
-					green = 0;
-					blue = 255;
-					alpha = 255;
-				}
-				else if (world_map((wolf.map_x), (wolf.map_y)) == 4)
-				{
-					red = 255;
-					green = 255;
-					blue = 255;
-					alpha = 255;
-				}
-				else
-				{
-					red = 0;
-					green = 0;
-					blue = 0;
-					alpha = 255;
-				}
-				if (wolf.side == 1)
-				{
-					red /= 2;
-					green /= 2;
-					blue /= 2;
-				}
-				SDL_SetRenderDrawColor(win.render, red, green, blue, 255);
-				SDL_RenderDrawLine(win.render, init.x, wolf.draw_start, init.x, wolf.draw_end);
+				color(&wolf);
+				render(&wolf, &win, &init);
 			}
 			init.x++;
 		}

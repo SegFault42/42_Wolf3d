@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 12:52:14 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/14 12:23:56 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/14 14:40:17 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,29 @@ typedef struct		s_init
 
 typedef struct		s_wolf
 {
-	double	camera_x;
-	double	ray_pos_x;
-	double	ray_pos_y;
-	double	ray_dir_x;
-	double	ray_dir_y;
-	int		map_x;
-	int		map_y;
-	double	side_dist_x;
-	double	side_dist_y;
-	double	delta_dist_x;
-	double	delta_dist_y;
-	double	perp_wall_dist;
-	int		step_x;
-	int		step_y;
-	int		hit;
-	int		side;
-	int		line_height;
-	int		draw_start;
-	int		draw_end;
+	double			camera_x;
+	double			ray_pos_x;
+	double			ray_pos_y;
+	double			ray_dir_x;
+	double			ray_dir_y;
+	int				map_x;
+	int				map_y;
+	double			side_dist_x;
+	double			side_dist_y;
+	double			delta_dist_x;
+	double			delta_dist_y;
+	double			perp_wall_dist;
+	int				step_x;
+	int				step_y;
+	int				hit;
+	int				side;
+	int				line_height;
+	int				draw_start;
+	int				draw_end;
+	unsigned char	red;
+	unsigned char	green;
+	unsigned char	blue;
+	unsigned char	alpha;
 }					t_wolf;
 /*
 ** window.c
@@ -88,7 +92,17 @@ void				init_env(t_wolf *wolf, t_init *init);
 void				calc_step(t_wolf *wolf);
 void				dda(t_wolf *wolf);
 void				calc_ray(t_wolf *wolf, t_init *init);
+void				color(t_wolf *wolf);
+void				render(t_wolf *wolf, t_win *win, t_init *init);
+/*
+** color.c
+*/
+void				red(t_wolf *wolf);
+void				green(t_wolf *wolf);
+void				blue(t_wolf *wolf);
+void				white(t_wolf *wolf);
+void				defaut(t_wolf *wolf);
 
-int		world_map(int x, int y);
+int					world_map(int x, int y);
 
 #endif

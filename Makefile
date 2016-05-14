@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/05/14 11:49:14 by rabougue         ###   ########.fr        #
+#    Updated: 2016/05/14 14:28:39 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ OBJS = ./main.o \
 	   ./window.o \
 	   ./init.o \
 	   ./wolf.o \
+	   ./color.o \
 	   #./draw.o \
 	   #./raycasting.o \
 
