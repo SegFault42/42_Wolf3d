@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/05/14 11:23:55 by rabougue         ###   ########.fr        #
+#    Updated: 2016/05/14 11:49:14 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ INCLUDE = -I ./includes/Wolf3d.h -I ./libft/includes/ -I ./includes/SDL2/
 OBJS = ./main.o \
 	   ./window.o \
 	   ./init.o \
+	   ./wolf.o \
 	   #./draw.o \
 	   #./raycasting.o \
 

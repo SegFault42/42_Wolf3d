@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 12:52:14 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/14 11:28:30 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/14 12:23:56 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ typedef struct		s_wolf
 	int		step_y;
 	int		hit;
 	int		side;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
 }					t_wolf;
 /*
 ** window.c
@@ -77,8 +80,15 @@ void				sdl_clear(t_win *win);
 /*
 ** init.c
 */
-void	init_pos(t_init *init);
-void	env(t_wolf *wolf, t_init *init);
+void				init_pos(t_init *init);
+void				init_env(t_wolf *wolf, t_init *init);
+/*
+** wolf.c
+*/
+void				calc_step(t_wolf *wolf);
+void				dda(t_wolf *wolf);
+void				calc_ray(t_wolf *wolf, t_init *init);
 
+int		world_map(int x, int y);
 
 #endif

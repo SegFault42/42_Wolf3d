@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 11:18:20 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/14 11:07:19 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/14 11:41:58 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_pos(t_init *init)
 	init->x = 0;
 }
 
-void	env(t_wolf *wolf, t_init *init)
+void	init_env(t_wolf *wolf, t_init *init)
 {
 	wolf->camera_x = 2 * init->x / (double)init->width - 1;
 	wolf->ray_pos_x = init->pos_x;

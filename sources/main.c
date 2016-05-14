@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 17:40:10 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/14 11:29:47 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/14 12:24:10 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,54 +57,12 @@ int main(int argc, char **argv)
 	{
 		while(init.x < init.width)
 		{
-			env(&wolf, &init);
-			if (wolf.ray_dir_x < 0)
-			{
-				wolf.step_x = -1;
-				wolf.side_dist_x = (wolf.ray_pos_x - wolf.map_x) * wolf.delta_dist_x;
-			}
-			else
-			{
-				wolf.step_x = 1;
-				wolf.side_dist_x = (wolf.map_x + 1.0 - wolf.ray_pos_x) * wolf.delta_dist_x;
-			}
-			if (wolf.ray_dir_y < 0)
-			{
-				wolf.step_y = -1;
-				wolf.side_dist_y = (wolf.ray_pos_y - wolf.map_y) * wolf.delta_dist_y;
-			}
-			else
-			{
-				wolf.step_y = 1;
-				wolf.side_dist_y = (wolf.map_y + 1.0 - wolf.ray_pos_y) * wolf.delta_dist_y;
-			}
+			init_env(&wolf, &init);
+			calc_step(&wolf);
 			while (wolf.hit == 0)
 			{
-				if (wolf.side_dist_x < wolf.side_dist_y)
-				{
-					wolf.side_dist_x += wolf.delta_dist_x;
-					wolf.map_x += wolf.step_x;
-					wolf.side = 0;
-				}
-				else
-				{
-					wolf.side_dist_y += wolf.delta_dist_y;
-					wolf.map_y += wolf.step_y;
-					wolf.side = 1;
-				}
-				if (world_map((wolf.map_x), (wolf.map_y)) > 0)
-					wolf.hit = 1;
-				if (wolf.side == 0)
-					wolf.perp_wall_dist  = (wolf.map_x - wolf.ray_pos_x + (1 - wolf.step_x) / 2) / wolf.ray_dir_x;
-				else
-					wolf.perp_wall_dist  = (wolf.map_y - wolf.ray_pos_y + (1 - wolf.step_y) / 2) / wolf.ray_dir_y;
-				int	line_height = (int)(init.height / wolf.perp_wall_dist );
-				int	draw_start = -line_height / 2 + init.height / 2;
-				if (draw_start < 0)
-					draw_start = 0;
-				int	draw_end = line_height / 2 + init.height / 2;
-				if (draw_end >= init.height)
-					draw_end = init.height -1;
+				dda(&wolf);
+				calc_ray(&wolf, &init);
 				unsigned char	red;
 				unsigned char	green;
 				unsigned char	blue;
@@ -151,7 +109,7 @@ int main(int argc, char **argv)
 					blue /= 2;
 				}
 				SDL_SetRenderDrawColor(win.render, red, green, blue, 255);
-				SDL_RenderDrawLine(win.render, init.x, draw_start, init.x, draw_end);
+				SDL_RenderDrawLine(win.render, init.x, wolf.draw_start, init.x, wolf.draw_end);
 			}
 			init.x++;
 		}
