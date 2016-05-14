@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/05/14 14:28:39 by rabougue         ###   ########.fr        #
+#    Updated: 2016/05/14 14:58:39 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ OBJS = ./main.o \
 	   ./init.o \
 	   ./wolf.o \
 	   ./color.o \
-	   #./draw.o \
+	   ./keyboard.o \
 	   #./raycasting.o \
 
 NAME = Wolf3d
@@ -62,6 +62,6 @@ fclean:
 	@printf "$(GREY)Deleting libft.a, all .o and Wolf3d ...$(END)"
 	@rm -f $(NAME) $(OBJS)
 	@make -s fclean -C ./libft/
-	@printf " [$(GREEN)Success$(GREY)]\n$(END)"
+	@printf " $(GREY)[$(GREEN)Success$(GREY)]\n$(END)"
 
 re: fclean all

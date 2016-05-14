@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 17:40:10 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/14 14:40:19 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/14 22:48:16 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		world_map(int x, int y)
 			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 			{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 			{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-			{1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+			{1,4,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 			{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 			{1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 			{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -53,6 +53,7 @@ int main(int argc, char **argv)
 
 	init_pos(&init);
 	init_window("Wolf3d", init.width, init.height, &win);
+	init.y = 0;
 	while (win.loop)
 	{
 		while(init.x < init.width)
@@ -69,50 +70,8 @@ int main(int argc, char **argv)
 			init.x++;
 		}
 		init.x = 0;
-		double	move_speed = 0.2;
-		double	rot_speed = 0.1;
-		double old_dir_x;
-		double old_plane_x;
-		while (SDL_PollEvent(&event))
-		{
-			if (event.type == SDL_QUIT)
-				win.loop = 0;
-			if (SDL_KEYDOWN)
-			{
-				if (event.key.keysym.sym == SDLK_ESCAPE)
-					win.loop = 0;
-				if (event.key.keysym.sym == SDLK_w)
-				{
-					if (world_map((int)(init.pos_x + init.dir_x * move_speed), (int)init.pos_y) == 0)
-						init.pos_x += init.dir_x * move_speed;
-					if (world_map((int)init.pos_x, ((int)(init.pos_y + init.dir_y * move_speed))) == 0)
-						init.pos_y += init.dir_y * move_speed;
-				}
-				if (event.key.keysym.sym == SDLK_s)
-				{
-					if (world_map((int)(init.pos_x - init.dir_x * move_speed), (int)init.pos_y) == 0)
-						init.pos_x -= init.dir_x * move_speed;
-					if (world_map((int)init.pos_x, ((int)(init.pos_y - init.dir_y * move_speed))) == 0)
-						init.pos_y -= init.dir_y * move_speed;
-				}
-				old_dir_x = init.dir_x;
-				old_plane_x = init.plane_x;
-				if (event.key.keysym.sym == SDLK_d)
-				{
-					init.dir_x = init.dir_x * cos(-rot_speed) - init.dir_y * sin(-rot_speed);
-					init.dir_y = old_dir_x * sin(-rot_speed) + init.dir_y * cos(-rot_speed);
-					init.plane_x = init.plane_x * cos(-rot_speed) - init.plane_y *sin(-rot_speed);
-					init.plane_y = old_plane_x * sin(-rot_speed) + init.plane_y * cos(-rot_speed);
-				}
-				if (event.key.keysym.sym == SDLK_a)
-				{
-					init.dir_x = init.dir_x * cos(rot_speed) - init.dir_y * sin(rot_speed);
-					init.dir_y = old_dir_x * sin(rot_speed) + init.dir_y * cos(rot_speed);
-					init.plane_x = init.plane_x * cos(rot_speed) - init.plane_y *sin(rot_speed);
-					init.plane_y = old_plane_x * sin(rot_speed) + init.plane_y * cos(rot_speed);
-				}
-			}
-		}
+		keyboard(&event, &win, &init, &wolf);
+		/*mouse(&event, &win, &init, &wolf);*/
 		SDL_RenderPresent(win.render);
 	}
 	close_window(&win);

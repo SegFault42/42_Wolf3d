@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 11:18:20 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/14 14:16:40 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/14 23:05:38 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ void	init_pos(t_init *init)
 	init->dir_y = 0;
 	init->plane_x = 0;
 	init->plane_y = 0.66;
-	init->width = 1920;
-	init->height = 1080;
+	init->width = 800;
+	init->height = 500;
 	init->x = 0;
+	init->move_speed = 0.2;
+	init->rot_speed = 0.1;
 }
 
 void	init_env(t_wolf *wolf, t_init *init)

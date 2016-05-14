@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 11:45:06 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/14 14:40:21 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/14 23:15:04 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,26 +73,26 @@ void	calc_ray(t_wolf *wolf, t_init *init)
 
 void	color(t_wolf *wolf)
 {
-	if (world_map((wolf->map_x), (wolf->map_y)) == 1)
+	if (wolf->side == 0 && wolf->ray_dir_x > 0)
 		red(wolf);
-	else if (world_map((wolf->map_x), (wolf->map_y)) == 2)
+	else if (wolf->side == 0 && wolf->ray_dir_x < 0)
 		green(wolf);
-	else if (world_map((wolf->map_x), (wolf->map_y)) == 3)
+	else if (wolf->side == 1 && wolf->ray_dir_y > 0)
 		blue(wolf);
-	else if (world_map((wolf->map_x), (wolf->map_y)) == 4)
-		white(wolf);
 	else
-		defaut(wolf);
-	if (wolf->side == 1)
-	{
-		wolf->red /= 2;
-		wolf->green /= 2;
-		wolf->blue /= 2;
-	}
+		white(wolf);
 }
 
 void	render(t_wolf *wolf, t_win *win, t_init *init)
 {
+	int y = 0;
+
+	SDL_SetRenderDrawColor(win->render, 51, 153, 255, 255);
+	SDL_RenderDrawLine(win->render, init->x, 0, init->x, wolf->draw_start);
+
 	SDL_SetRenderDrawColor(win->render, wolf->red, wolf->green, wolf->blue, 255);
 	SDL_RenderDrawLine(win->render, init->x, wolf->draw_start, init->x, wolf->draw_end);
+	
+	SDL_SetRenderDrawColor(win->render, 96, 96, 96, 255);
+	SDL_RenderDrawLine(win->render, init->x, wolf->draw_end, init->x, init->height);
 }
