@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 11:18:20 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/15 01:51:01 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/15 23:25:25 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_pos(t_init *init)
 {
-	init->pos_x = 22;
+	init->pos_x = 12;
 	init->pos_y = 12;
 	init->dir_x = -1;
 	init->dir_y = 0;
