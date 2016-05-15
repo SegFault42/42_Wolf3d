@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 14:58:09 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/14 17:06:51 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/15 02:10:13 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	move_w_s(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf)
 		if (world_map((int)init->pos_x, ((int)(init->pos_y + init->dir_y *
 							init->move_speed))) == 0)
 			init->pos_y += init->dir_y * init->move_speed;
+		walk(init);
 	}
 	if (event->key.keysym.sym == SDLK_s)
 	{
@@ -50,6 +51,7 @@ void	move_w_s(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf)
 		if (world_map((int)init->pos_x, ((int)(init->pos_y - init->dir_y *
 							init->move_speed))) == 0)
 			init->pos_y -= init->dir_y * init->move_speed;
+		walk(init);
 	}
 }
 

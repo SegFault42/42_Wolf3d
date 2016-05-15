@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 12:52:14 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/14 22:47:29 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/15 02:09:48 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,11 @@ typedef struct		s_init
 	int				width;
 	int				height;
 	int				x;
-	int				y;
 	double			move_speed;
 	double			rot_speed;
 	double			old_dir_x;
 	double			old_plane_x;
-	
+	int				nb;
 }					t_init;
 
 typedef struct		s_wolf
@@ -118,6 +117,7 @@ void				move_a_d(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf);
 
 
 int					world_map(int x, int y);
-void	draw_sky(t_init *init, t_win *win, int start, int end);
+void				draw_sky(t_init *init, t_win *win, int start, int end);
+void				walk(t_init *init);
 
 #endif
