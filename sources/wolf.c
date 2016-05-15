@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 11:45:06 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/15 15:23:53 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/15 18:24:39 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,18 +85,15 @@ void	color(t_wolf *wolf)
 
 void	render(t_wolf *wolf, t_win *win, t_init *init)
 {
-	int reflet = wolf->draw_end - wolf->draw_start;
+	int reflet = (wolf->draw_end - wolf->draw_start) / 2;
+	int grey = 80;
 
 	SDL_SetRenderDrawColor(win->render, 30, 153, 255, 255);
 	SDL_RenderDrawLine(win->render, init->x, 0, init->x, wolf->draw_start);
-
-	SDL_SetRenderDrawColor(win->render, wolf->red * wolf->blue * wolf->green, wolf->green, wolf->blue, 255);
-	SDL_RenderDrawLine(win->render, init->x, wolf->draw_start, init->x, wolf->draw_end);
-
-
 	SDL_SetRenderDrawColor(win->render, wolf->red, wolf->green, wolf->blue, 255);
+	SDL_RenderDrawLine(win->render, init->x, wolf->draw_start, init->x, wolf->draw_end);
+	SDL_SetRenderDrawColor(win->render, (wolf->red + grey) /2, (wolf->green + grey) / 2, (wolf->blue + grey) / 2, 255);
 	SDL_RenderDrawLine(win->render, init->x, wolf->draw_end, init->x, wolf->draw_end + reflet);
-
-	SDL_SetRenderDrawColor(win->render, 96, 96, 96, 255);
-	SDL_RenderDrawLine(win->render, init->x, wolf->draw_end + reflet, init->x, init->height);
+	SDL_SetRenderDrawColor(win->render, grey, grey, grey, 255);
+	SDL_RenderDrawLine(win->render, init->x, wolf->draw_end + reflet , init->x, init->height);
 }
