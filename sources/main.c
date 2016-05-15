@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 17:40:10 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/15 14:36:23 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/15 20:04:08 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,15 @@ int		world_map(int x, int y)
 	return (world_map[x][y]);
 }
 
+void	load_media(t_win *win)
+{
+
+	win->hand = SDL_LoadBMP("./pics/bloggif_5738afcc2a6b4.bmp");
+	if (win->hand == NULL)
+		ft_putendl("Failed to open .png file");
+
+}
+
 int main(int argc, char **argv)
 {
 	t_win		win;
@@ -54,6 +63,7 @@ int main(int argc, char **argv)
 	init_pos(&init);
 	init_window("Wolf3d", init.width, init.height, &win);
 	ambient();
+	win.g_screen_surface = SDL_GetWindowSurface(win.win);
 	while (win.loop)
 	{
 		while(init.x < init.width)
@@ -72,6 +82,8 @@ int main(int argc, char **argv)
 		init.x = 0;
 		keyboard(&event, &win, &init, &wolf);
 		/*mouse(&event, &win, &init, &wolf);*/
+				load_media(&win);
+				SDL_BlitSurface(win.hand, NULL, win.g_screen_surface, NULL);
 		SDL_RenderPresent(win.render);
 	}
 	close_window(&win);
