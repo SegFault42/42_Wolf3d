@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 14:16:13 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/14 14:28:10 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/15 02:42:18 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 void	red(t_wolf *wolf)
 {
-	wolf->red = 255;
-	wolf->green = 0;
-	wolf->blue = 0;
+	wolf->red = 200;
+	wolf->green = 10;
+	wolf->blue = 10;
 	wolf->alpha = 255;
 }
 
 void	green(t_wolf *wolf)
 {
-	wolf->red = 0;
-	wolf->green = 255;
-	wolf->blue = 0;
+	wolf->red = 150;
+	wolf->green = 170;
+	wolf->blue = 100;
 	wolf->alpha = 255;
 }
 
