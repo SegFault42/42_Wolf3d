@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 17:40:10 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/15 02:42:24 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/15 14:36:23 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int main(int argc, char **argv)
 
 	init_pos(&init);
 	init_window("Wolf3d", init.width, init.height, &win);
+	ambient();
 	while (win.loop)
 	{
 		while(init.x < init.width)

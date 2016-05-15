@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 11:18:20 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/14 10:38:50 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/15 14:40:00 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	close_window(t_win *win)
 {
 	SDL_DestroyRenderer(win->render);
 	SDL_DestroyWindow(win->win);
+	system("killall afplay");
 	SDL_Quit();
 }
 

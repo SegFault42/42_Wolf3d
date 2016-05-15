@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 12:52:14 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/15 02:42:28 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/15 15:03:58 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,12 @@ void				keyboard(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf);
 void				mouse(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf);
 void				move_w_s(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf);
 void				move_a_d(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf);
-
+/*
+** keyboard.c
+*/
+void				ambient(void);
+void				walk(t_init *init, t_wolf *wolf);
 
 int					world_map(int x, int y);
-void				draw_sky(t_init *init, t_win *win, int start, int end);
-void				walk(t_init *init, t_wolf *wolf);
 
 #endif
