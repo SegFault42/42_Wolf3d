@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 17:40:10 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/16 18:50:42 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/16 23:08:41 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	main(int argc, char **argv)
 		}
 		init.x = 0;
 		keyboard(&event, &win, &init, &wolf);
+		deagle(&win);
 		SDL_RenderPresent(win.render);
 	}
 	close_window(&win);

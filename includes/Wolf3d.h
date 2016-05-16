@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 12:52:14 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/16 18:48:51 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/16 23:33:16 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # include <math.h>
 # include "../libft/includes/libft.h"
 # include "./SDL2/SDL.h"
-//# include "./SDL2/SDL_opengl.h"
+# include "../includes/SDL2/SDL_surface.h"
+
 
 # define MAPWIDTH 24
 # define MAPHEIGHT 24
@@ -27,7 +28,7 @@ typedef struct		s_win
 {
 	SDL_Window		*win;
 	SDL_Renderer	*render;
-	SDL_Surface		*hand;
+	SDL_Surface		*title_screen;
 	SDL_Surface		*g_screen_surface;
 	SDL_Rect		srcrect;
 	SDL_Rect		dstrect;
@@ -130,5 +131,7 @@ void				walk(t_init *init, t_wolf *wolf);
 ** map.c
 */
 int					world_map(int x, int y);
+
+void				deagle(t_win *win);
 
 #endif

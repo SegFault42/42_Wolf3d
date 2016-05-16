@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 14:58:09 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/16 18:47:21 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/16 23:39:09 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,10 @@ void	start(t_win *win, SDL_Event *event)
 	{
 		init_title_screen(win);
 		win->g_screen_surface = SDL_GetWindowSurface(win->win);
-		win->hand = SDL_LoadBMP("./media/pics/Wolf3DTitleScreen.bmp");
-		if (win->hand == NULL)
-			ft_putendl("Failed to open .png file");
-		SDL_BlitSurface(win->hand, &win->srcrect, win->g_screen_surface,
+		win->title_screen = SDL_LoadBMP("./media/pics/Wolf3DTitleScreen.bmp");
+		if (win->title_screen == NULL)
+			ft_putendl("Failed to open .bmp file");
+		SDL_BlitSurface(win->title_screen, &win->srcrect, win->g_screen_surface,
 				&win->dstrect);
 		SDL_RenderPresent(win->render);
 		SDL_PollEvent(event);
@@ -127,4 +127,16 @@ void	start(t_win *win, SDL_Event *event)
 			}
 		}
 	}
+}
+
+void	deagle(t_win *win)
+{
+	SDL_Surface *deagle;
+	SDL_Rect pos_deagle;
+
+	pos_deagle.x = 0;
+	pos_deagle.y = 0;
+	deagle = SDL_LoadBMP("./media/pics/deagle.bmp");
+	SDL_SetColorKey(deagle, 0x00001000, SDL_MapRGB(deagle->format, 19, 255, 7));
+	SDL_BlitSurface(deagle, NULL, win->g_screen_surface, &pos_deagle);
 }
