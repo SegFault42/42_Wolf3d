@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/05/15 02:10:30 by rabougue         ###   ########.fr        #
+#    Updated: 2016/05/16 18:49:15 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ OBJS = ./main.o \
 	   ./color.o \
 	   ./keyboard.o \
 	   ./sound.o \
+	   ./map.o \
 
 NAME = Wolf3d
 FRAMEWORK = -framework OpenGL

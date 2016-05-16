@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 14:58:09 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/15 23:19:01 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/16 18:47:21 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	mouse(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf)
 	SDL_MouseMotionEvent *motion;
 
 	motion = &event->motion;
-	
 	if (SDL_MOUSEMOTION > 0 && SDL_MOUSEMOTION < 1280)
 	{
 		init->dir_x = init->dir_x * cos(-init->rot_speed) - init->dir_y *
@@ -96,6 +95,36 @@ void	keyboard(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf)
 			init->old_dir_x = init->dir_x;
 			init->old_plane_x = init->plane_x;
 			move_a_d(event, win, init, wolf);
+		}
+	}
+}
+
+void	start(t_win *win, SDL_Event *event)
+{
+	int loop;
+
+	loop = 1;
+	while (loop)
+	{
+		init_title_screen(win);
+		win->g_screen_surface = SDL_GetWindowSurface(win->win);
+		win->hand = SDL_LoadBMP("./media/pics/Wolf3DTitleScreen.bmp");
+		if (win->hand == NULL)
+			ft_putendl("Failed to open .png file");
+		SDL_BlitSurface(win->hand, &win->srcrect, win->g_screen_surface,
+				&win->dstrect);
+		SDL_RenderPresent(win->render);
+		SDL_PollEvent(event);
+		if (SDL_KEYDOWN)
+		{
+			if (event->key.keysym.sym == SDLK_ESCAPE || event->type == SDL_QUIT)
+				exit(1);
+			else if (event->key.keysym.sym == SDLK_SPACE)
+			{
+				system("afplay ./media/sound/start.mp3&");
+				usleep(1000);
+				loop = 0;
+			}
 		}
 	}
 }

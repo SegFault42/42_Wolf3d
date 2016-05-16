@@ -6,33 +6,33 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 11:45:06 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/16 14:40:31 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/16 18:40:55 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Wolf3d.h"
 
-void	calc_step(t_wolf *wolf)
+void	calc_step(t_wolf *w)
 {
-	if (wolf->ray_dir_x < 0)
+	if (w->ray_dir_x < 0)
 	{
-		wolf->step_x = -1;
-		wolf->side_dist_x = (wolf->ray_pos_x - wolf->map_x) * wolf->delta_dist_x;
+		w->step_x = -1;
+		w->side_dist_x = (w->ray_pos_x - w->map_x) * w->delta_dist_x;
 	}
 	else
 	{
-		wolf->step_x = 1;
-		wolf->side_dist_x = (wolf->map_x + 1.0 - wolf->ray_pos_x) * wolf->delta_dist_x;
+		w->step_x = 1;
+		w->side_dist_x = (w->map_x + 1.0 - w->ray_pos_x) * w->delta_dist_x;
 	}
-	if (wolf->ray_dir_y < 0)
+	if (w->ray_dir_y < 0)
 	{
-		wolf->step_y = -1;
-		wolf->side_dist_y = (wolf->ray_pos_y - wolf->map_y) * wolf->delta_dist_y;
+		w->step_y = -1;
+		w->side_dist_y = (w->ray_pos_y - w->map_y) * w->delta_dist_y;
 	}
 	else
 	{
-		wolf->step_y = 1;
-		wolf->side_dist_y = (wolf->map_y + 1.0 - wolf->ray_pos_y) * wolf->delta_dist_y;
+		w->step_y = 1;
+		w->side_dist_y = (w->map_y + 1.0 - w->ray_pos_y) * w->delta_dist_y;
 	}
 }
 
@@ -57,18 +57,18 @@ void	dda(t_wolf *wolf)
 void	calc_ray(t_wolf *wolf, t_init *init)
 {
 	if (wolf->side == 0)
-		wolf->perp_wall_dist  = (wolf->map_x - wolf->ray_pos_x +
+		wolf->perp_wall_dist = (wolf->map_x - wolf->ray_pos_x +
 		(1 - wolf->step_x) / 2) / wolf->ray_dir_x;
 	else
-		wolf->perp_wall_dist  = (wolf->map_y - wolf->ray_pos_y +
+		wolf->perp_wall_dist = (wolf->map_y - wolf->ray_pos_y +
 			(1 - wolf->step_y) / 2) / wolf->ray_dir_y;
-	wolf->line_height = (int)(init->height / wolf->perp_wall_dist );
+	wolf->line_height = (int)(init->height / wolf->perp_wall_dist);
 	wolf->draw_start = -wolf->line_height / 2 + init->height / 2;
 	if (wolf->draw_start < 0)
 		wolf->draw_start = 0;
 	wolf->draw_end = wolf->line_height / 2 + init->height / 2;
 	if (wolf->draw_end >= init->height)
-		wolf->draw_end = init->height -1;
+		wolf->draw_end = init->height - 1;
 }
 
 void	color(t_wolf *wolf)
@@ -83,26 +83,27 @@ void	color(t_wolf *wolf)
 		white(wolf);
 }
 
-void	render(t_wolf *wolf, t_win *win, t_init *init)
+void	render(t_wolf *wo, t_win *w, t_init *i)
 {
-	int reflet = (wolf->draw_end - wolf->draw_start) / 2;
-	int grey = 80;
+	int	reflect;
+	int	grey;
 
-	SDL_SetRenderDrawColor(win->render, 30, 153, 255, 255);
-	SDL_RenderDrawLine(win->render, init->x, 0, init->x, wolf->draw_start - 2);
-
-	SDL_SetRenderDrawColor(win->render, 0, 0, 0, 255);
-	SDL_RenderDrawLine(win->render, init->x, wolf->draw_start - 2, init->x, wolf->draw_start);
-	
-	SDL_SetRenderDrawColor(win->render, wolf->red, wolf->green, wolf->blue, 255);
-	SDL_RenderDrawLine(win->render, init->x, wolf->draw_start, init->x, wolf->draw_end);
-	
-	SDL_SetRenderDrawColor(win->render, 0, 0, 0, 255);
-	SDL_RenderDrawLine(win->render, init->x, wolf->draw_end - 2, init->x, wolf->draw_end);
-	
-	SDL_SetRenderDrawColor(win->render, (wolf->red + grey) /2, (wolf->green + grey) / 2, (wolf->blue + grey) / 2, 255);
-	SDL_RenderDrawLine(win->render, init->x, wolf->draw_end, init->x, wolf->draw_end + reflet);
-	
-	SDL_SetRenderDrawColor(win->render, grey, grey, grey, 255);
-	SDL_RenderDrawLine(win->render, init->x, wolf->draw_end + reflet , init->x, init->height);
+	reflect = (wo->draw_end - wo->draw_start) / 2;
+	grey = 80;
+	SDL_SetRenderDrawColor(w->render, 30, 153, 255, 255);
+	SDL_RenderDrawLine(w->render, i->x, 0, i->x, wo->draw_start - 2);
+	SDL_SetRenderDrawColor(w->render, 0, 0, 0, 255);
+	SDL_RenderDrawLine(w->render, i->x, wo->draw_start - 2, i->x,
+			wo->draw_start);
+	SDL_SetRenderDrawColor(w->render, wo->red, wo->green, wo->blue, 255);
+	SDL_RenderDrawLine(w->render, i->x, wo->draw_start, i->x, wo->draw_end);
+	SDL_SetRenderDrawColor(w->render, 0, 0, 0, 255);
+	SDL_RenderDrawLine(w->render, i->x, wo->draw_end - 2, i->x, wo->draw_end);
+	SDL_SetRenderDrawColor(w->render, (wo->red + grey) / 2, (wo->green + grey) /
+			2, (wo->blue + grey) / 2, 255);
+	SDL_RenderDrawLine(w->render, i->x, wo->draw_end, i->x, wo->draw_end
+			+ reflect);
+	SDL_SetRenderDrawColor(w->render, grey, grey, grey, 255);
+	SDL_RenderDrawLine(w->render, i->x, wo->draw_end + reflect, i->x,
+			i->height);
 }

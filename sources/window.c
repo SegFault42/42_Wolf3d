@@ -6,20 +6,22 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 11:18:20 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/15 14:40:00 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/16 18:28:35 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Wolf3d.h"
 
-int	init_window(char *win_name, int width, int height, t_win *win)
+int		init_window(char *win_name, int width, int height, t_win *win)
 {
 	win->loop = 1;
 	SDL_Init(SDL_INIT_VIDEO);
-	win->win = SDL_CreateWindow(win_name, 0, 0, width, height, SDL_WINDOW_SHOWN);
+	win->win = SDL_CreateWindow(win_name, 0, 0, width, height,
+			SDL_WINDOW_SHOWN);
 	if (win->win == NULL)
 	{
-		ft_putendl("Could not create window.");
+		ft_putstr("Could not create window : ");
+		ft_putendl(SDL_GetError());
 		exit(1);
 	}
 	win->render = SDL_CreateRenderer(win->win, -1, SDL_RENDERER_SOFTWARE);

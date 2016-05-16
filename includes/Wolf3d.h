@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 12:52:14 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/16 14:22:05 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/16 18:48:51 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,16 +94,17 @@ void				sdl_clear(t_win *win);
 /*
 ** init.c
 */
+void				init_title_screen(t_win *win);
 void				init_pos(t_init *init);
 void				init_env(t_wolf *wolf, t_init *init);
 /*
 ** wolf.c
 */
-void				calc_step(t_wolf *wolf);
+void				calc_step(t_wolf *w);
 void				dda(t_wolf *wolf);
 void				calc_ray(t_wolf *wolf, t_init *init);
 void				color(t_wolf *wolf);
-void				render(t_wolf *wolf, t_win *win, t_init *init);
+void				render(t_wolf *wo, t_win *w, t_init *i);
 /*
 ** color.c
 */
@@ -119,14 +120,15 @@ void				keyboard(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf);
 void				mouse(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf);
 void				move_w_s(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf);
 void				move_a_d(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf);
+void				start(t_win *win, SDL_Event *event);
 /*
-** keyboard.c
+** sound.c
 */
 void				ambient(void);
 void				walk(t_init *init, t_wolf *wolf);
-
-void				load_media(t_win *win, SDL_Event *event);
+/*
+** map.c
+*/
 int					world_map(int x, int y);
-void				init_splash(t_win *win);
 
 #endif
