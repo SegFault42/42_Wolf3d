@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 12:52:14 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/15 19:55:43 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/16 14:22:05 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ typedef struct		s_win
 	SDL_Renderer	*render;
 	SDL_Surface		*hand;
 	SDL_Surface		*g_screen_surface;
+	SDL_Rect		srcrect;
+	SDL_Rect		dstrect;
 	int				loop;
 }					t_win;
 
@@ -123,7 +125,8 @@ void				move_a_d(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf);
 void				ambient(void);
 void				walk(t_init *init, t_wolf *wolf);
 
-void				load_media(t_win *win);
+void				load_media(t_win *win, SDL_Event *event);
 int					world_map(int x, int y);
+void				init_splash(t_win *win);
 
 #endif
