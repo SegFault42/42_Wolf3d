@@ -6,29 +6,28 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 14:58:09 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/17 18:15:31 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/18 01:27:27 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Wolf3d.h"
 
-void	mouse(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf)
-{
-	SDL_MouseMotionEvent *motion;
+/*void	mouse(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf)*/
+/*{*/
+	/*[>SDL_MouseMotionEvent *motion;<]*/
 
-	motion = &event->motion;
-	if (SDL_MOUSEMOTION > 0 && SDL_MOUSEMOTION < 1280)
-	{
-		init->dir_x = init->dir_x * cos(-init->rot_speed) - init->dir_y *
-			sin(-init->rot_speed);
-		init->dir_y = init->old_dir_x * sin(-init->rot_speed) + init->dir_y *
-			cos(-init->rot_speed);
-		init->plane_x = init->plane_x * cos(-init->rot_speed) - init->plane_y *
-			sin(-init->rot_speed);
-		init->plane_y = init->old_plane_x * sin(-init->rot_speed) +
-			init->plane_y * cos(-init->rot_speed);
-	}
-}
+	/*[>motion = &event->motion;<]*/
+	/*[>if (SDL_MOUSEMOTION > 0 && SDL_MOUSEMOTION < 1280)<]*/
+	/*int x = 0;*/
+	/*int y = 0;*/
+
+	/*if (event->type == SDL_MOUSEMOTION)*/
+	/*{*/
+		/*x = event->motion.x;*/
+		/*y = event->motion.y;*/
+	/*}*/
+	/*printf("x = %d, y = %d\n", x, y);*/
+/*}*/
 
 void	move_w_s(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf)
 {
@@ -96,7 +95,24 @@ void	keyboard(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf)
 			init->old_plane_x = init->plane_x;
 			move_a_d(event, win, init, wolf);
 		}
+		if (event->type == SDL_KEYDOWN && event->key.repeat == 0)
+			if (event->key.keysym.sym == SDLK_r)
+			{
+				system("afplay ./media/sound/deagle_reload.mp3&");
+				init->bullet = 0;
+			}
+		if (init->bullet < 12)
+		{
+			if(event->type == SDL_MOUSEBUTTONDOWN)
+				if (event->button.button == SDL_BUTTON_LEFT)
+				{
+					flash(win);
+					system("afplay ./media/sound/deagle_fire.mp3&");
+				}
+			init->bullet++;
+		}
 	}
+	printf("bullet = %d\n", init->bullet);
 }
 
 void	start(t_win *win, SDL_Event *event)
@@ -122,7 +138,7 @@ void	start(t_win *win, SDL_Event *event)
 			else if (event->key.keysym.sym == SDLK_SPACE)
 			{
 				system("afplay ./media/sound/start.mp3&");
-				usleep(1000);
+				SDL_Delay(1000);
 				loop = 0;
 			}
 		}
@@ -138,4 +154,15 @@ void	deagle(t_win *win)
 	pos_deagle.y = 0;
 	deagle = IMG_Load("./media/pics/deagle.png");
 	SDL_BlitSurface(deagle, NULL, win->g_screen_surface, &pos_deagle);
+}
+
+void	flash(t_win *win)
+{
+	SDL_Surface *flash;
+	SDL_Rect pos_flash;
+
+	pos_flash.x = 0;
+	pos_flash.y = 40;
+	flash = IMG_Load("./media/pics/fire.png");
+	SDL_BlitSurface(flash, NULL, win->g_screen_surface, &pos_flash);
 }

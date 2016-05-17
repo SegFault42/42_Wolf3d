@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 17:40:10 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/17 18:28:51 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/18 00:33:44 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	main(int argc, char **argv)
 	set_icon(&win);
 	start(&win, &event);
 	ambient();
+		deagle(&win);
 	while (win.loop)
 	{
 		while (init.x < init.width)
@@ -55,6 +56,7 @@ int	main(int argc, char **argv)
 		keyboard(&event, &win, &init, &wolf);
 		deagle(&win);
 		SDL_RenderPresent(win.render);
+		/*mouse(&event, &win, &init, &wolf);*/
 	}
 	close_window(&win);
 	return (0);
