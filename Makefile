@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/05/16 23:33:06 by rabougue         ###   ########.fr        #
+#    Updated: 2016/05/17 16:40:06 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ OBJS = ./main.o \
 NAME = Wolf3d
 FRAMEWORK = -framework OpenGL
 ##################################_CHANGE_PATH_#################################
-SDL = ./libsdl/libSDL2-2.0.0.dylib
+SDL2DYLIB = ./libsdl/libSDL2-2.0.0.dylib
+SDL2_image = ./libsdl/SDL2_image
 ##################################_RELINK_MODIFY_.h#############################
 RELINK_H = ./includes/Wolf3d.h
 
@@ -47,9 +48,11 @@ $(NAME): $(OBJS)
 	@printf "Compiling .o ..."
 	@printf "                        [$(GREEN)Success$(GREY)]\n"
 	@printf "Compiling Wolf3d ..."
-	@$(CC) $(FLAG) -rpath './libsdl/' $(LFT) $(LSDL) $(INCLUDE) $(OBJS) -o $(NAME) $(FRAMEWORK)
+	@$(CC) $(FLAG) $(LFT) $(LSDL) $(INCLUDE) $(OBJS) -o $(NAME) $(FRAMEWORK) $(SDL2_image)
 	@printf "                    [$(GREEN)Success$(GREY)]\n$(END)"
-	@install_name_tool -change /usr/local/lib/libSDL2-2.0.0.dylib $(SDL) $(NAME)
+	@install_name_tool -change /usr/local/lib/libSDL2-2.0.0.dylib $(SDL2DYLIB) $(NAME)
+	@install_name_tool -change @rpath/SDL2_image.framework/Versions/A/SDL2_image $(SDL2_image) $(NAME)
+	@install_name_tool -change lib/libsdl/libSDL2-2.0.0.dylib $(SDL2DYLIB) $(SDL2_image)
 
 %.o : %.c ${RELINK_H}
 	@$(CC) -c $(FLAG) $< -o $@

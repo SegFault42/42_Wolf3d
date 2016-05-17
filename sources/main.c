@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 17:40:10 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/16 23:08:41 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/17 15:45:22 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(int argc, char **argv)
 	t_wolf		wolf;
 	t_init		init;
 	SDL_Event	event;
+	SDL_Surface *pIcon = IMG_Load("./media/pics/icone.bmp");
 
 	init_pos(&init);
 	init_window("Wolf3d", init.width, init.height, &win);

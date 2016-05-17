@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 12:52:14 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/16 23:49:55 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/17 15:38:32 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "../libft/includes/libft.h"
 # include "./SDL2/SDL.h"
 # include "../includes/SDL2/SDL_video.h"
+# include "../includes/SDL2/SDL_image.h"
 
 # define SDL_SRCCOLORKEY 0x00001000
 # define MAPWIDTH 24
