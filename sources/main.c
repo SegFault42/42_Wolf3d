@@ -6,11 +6,23 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 17:40:10 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/17 15:45:22 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/17 18:28:51 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Wolf3d.h"
+
+int	set_icon(t_win *win)
+{
+	win->icon = IMG_Load("./media/pics/icon.png");
+	if (win->icon == NULL)
+	{
+		ft_putendl("Cannot load icon.png");
+		return (EXIT_FAILURE);
+	}
+	SDL_SetWindowIcon(win->win, win->icon);
+	return (EXIT_SUCCESS);
+}
 
 int	main(int argc, char **argv)
 {
@@ -18,10 +30,10 @@ int	main(int argc, char **argv)
 	t_wolf		wolf;
 	t_init		init;
 	SDL_Event	event;
-	SDL_Surface *pIcon = IMG_Load("./media/pics/icone.bmp");
 
 	init_pos(&init);
 	init_window("Wolf3d", init.width, init.height, &win);
+	set_icon(&win);
 	start(&win, &event);
 	ambient();
 	while (win.loop)

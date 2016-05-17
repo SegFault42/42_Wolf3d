@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 12:52:14 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/17 15:38:32 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/17 18:28:17 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct		s_win
 	SDL_Renderer	*render;
 	SDL_Surface		*title_screen;
 	SDL_Surface		*g_screen_surface;
+	SDL_Surface		*icon;
 	SDL_Rect		srcrect;
 	SDL_Rect		dstrect;
 	int				loop;
@@ -133,6 +134,7 @@ void				walk(t_init *init, t_wolf *wolf);
 */
 int					world_map(int x, int y);
 
+int					set_icon(t_win *win);
 void				deagle(t_win *win);
 
 #endif

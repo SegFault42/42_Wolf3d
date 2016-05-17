@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 14:58:09 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/16 23:50:14 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/17 18:15:31 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,6 @@ void	deagle(t_win *win)
 
 	pos_deagle.x = 0;
 	pos_deagle.y = 0;
-	deagle = SDL_LoadBMP("./media/pics/deagle.bmp");
-	SDL_SetColorKey(deagle, SDL_SRCCOLORKEY, SDL_MapRGB(deagle->format, 19, 255, 7));
+	deagle = IMG_Load("./media/pics/deagle.png");
 	SDL_BlitSurface(deagle, NULL, win->g_screen_surface, &pos_deagle);
 }
