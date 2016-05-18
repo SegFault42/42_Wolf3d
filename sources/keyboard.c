@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 14:58:09 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/18 16:43:33 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/18 17:18:06 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,16 @@ void	event_joystick(t_init *init)
 {
 	SDL_Event	event;
 
-	/*SDL_JoystickUpdate();*/
 	SDL_JoystickEventState(SDL_ENABLE);
 	SDL_WaitEvent(&event);
-		/*if ( SDL_JoystickGetButton(init->joystick, 11) )*/
-			/*printf("Bouton appuyé\n");*/
 	if (event.type == SDL_JOYBUTTONDOWN)
-		ft_debug();
-	if (event.type == SDL_JOYBUTTONDOWN || event.type == SDL_JOYBUTTONUP)
 	{
 		if (event.jbutton.state == SDL_PRESSED)
-			printf("Appui sur le bouton %d du joystick %d\n", event.jbutton.button, event.jbutton.which);
-		else if (event.jbutton.state == SDL_RELEASED)
-			printf("Appui sur le bouton %d du joystick %d\n", event.jbutton.button, event.jbutton.which);
+		{
+				/*flash(win);*/
+				system("afplay ./media/sound/deagle_fire.mp3&");
+				init->bullet++;
+		}
 	}
 }
 
@@ -119,6 +116,7 @@ void	keyboard(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf)
 			init->old_dir_x = init->dir_x;
 			init->old_plane_x = init->plane_x;
 			move_a_d(event, win, init, wolf);
+			event_joystick(init);
 		}
 		sound_deagle(event, init, win);
 	}
