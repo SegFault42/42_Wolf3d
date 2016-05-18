@@ -6,40 +6,45 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 14:58:09 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/18 12:20:09 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/18 16:43:33 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Wolf3d.h"
 
-void	init_joystick(void)
+void	init_joystick(t_init *init)
 {
-	SDL_Joystick *joystick = NULL;
-	int numJoystick = SDL_NumJoysticks();
+	init->joystick = NULL;
+	int				num_joystick;
 
-	if (SDL_INIT_JOYSTICK < 0)
-		ft_putendl("Cannot initialize joystick.");
-	printf("found %d controller\n", numJoystick);
-	if (numJoystick >= 1)
+	if (SDL_Init(SDL_INIT_JOYSTICK) == -1)
+		ft_putendl("Failed to init Joystick.");
+	else
+		ft_putendl("Joystick initialization [ok]");
+	num_joystick = SDL_NumJoysticks();
+	printf("found %d controller\n", num_joystick);
+	if (num_joystick >= 1)
 	{
-		/*ft_putendl("Joystick found : PLAYSTATION(R)3 Controller.");*/
-		printf("Joystick found : %s.\n", SDL_JoystickName(0));
-		printf("Nombre de boutons : %d\n",SDL_JoystickNumButtons(joystick));
-		joystick = SDL_JoystickOpen(0);
-		if (joystick == NULL)
+		init->joystick = SDL_JoystickOpen(0);
+		if (init->joystick == NULL)
 			ft_putendl("PLAYSTATION(R)3 Controller error.");
-		/*else*/
-			/*ft_putendl("PLAYSTATION(R)3 Controller ready.");*/
+		else
+			ft_putendl("Joystick found : PLAYSTATION(R)3 Controller.");
+		printf("Nombre de boutons : %d\n",SDL_JoystickNumButtons(init->joystick));
 	}
 }
 
-void	joystick(void)
+void	event_joystick(t_init *init)
 {
-	SDL_Event event;
+	SDL_Event	event;
 
-	init_joystick();
-	SDL_WaitEvent(&event);
+	/*SDL_JoystickUpdate();*/
 	SDL_JoystickEventState(SDL_ENABLE);
+	SDL_WaitEvent(&event);
+		/*if ( SDL_JoystickGetButton(init->joystick, 11) )*/
+			/*printf("Bouton appuyé\n");*/
+	if (event.type == SDL_JOYBUTTONDOWN)
+		ft_debug();
 	if (event.type == SDL_JOYBUTTONDOWN || event.type == SDL_JOYBUTTONUP)
 	{
 		if (event.jbutton.state == SDL_PRESSED)

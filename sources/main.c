@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 17:40:10 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/18 12:20:52 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/18 16:40:17 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int argc, char **argv)
 	start(&win, &event);
 	ambient();
 	deagle(&win);
-	init_joystick();
+	init_joystick(&init);
 	while (win.loop)
 	{
 		while (init.x < init.width)
@@ -57,6 +57,7 @@ int	main(int argc, char **argv)
 		keyboard(&event, &win, &init, &wolf);
 		deagle(&win);
 		SDL_RenderPresent(win.render);
+		event_joystick(&init);
 		/*mouse(&event, &win, &init, &wolf);*/
 	}
 	close_window(&win);

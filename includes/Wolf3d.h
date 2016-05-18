@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 12:52:14 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/18 11:45:08 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/18 16:20:36 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct		s_init
 	double			old_plane_x;
 	int				nb;
 	int				bullet;
+	SDL_Joystick	*joystick;
 
 }					t_init;
 
@@ -140,6 +141,6 @@ void				deagle(t_win *win);
 void				flash(t_win *win);
 void				sound_deagle(SDL_Event *event, t_init *init, t_win *win);
 void				init_joystick();
-void				joystick();
+void				event_joystick();
 
 #endif
