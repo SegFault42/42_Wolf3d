@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 14:58:09 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/18 01:27:27 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/18 10:59:05 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,24 +95,30 @@ void	keyboard(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf)
 			init->old_plane_x = init->plane_x;
 			move_a_d(event, win, init, wolf);
 		}
-		if (event->type == SDL_KEYDOWN && event->key.repeat == 0)
-			if (event->key.keysym.sym == SDLK_r)
-			{
-				system("afplay ./media/sound/deagle_reload.mp3&");
-				init->bullet = 0;
-			}
-		if (init->bullet < 12)
-		{
-			if(event->type == SDL_MOUSEBUTTONDOWN)
-				if (event->button.button == SDL_BUTTON_LEFT)
-				{
-					flash(win);
-					system("afplay ./media/sound/deagle_fire.mp3&");
-				}
-			init->bullet++;
-		}
+		sound_deagle(event, init, win);
 	}
-	printf("bullet = %d\n", init->bullet);
+}
+
+void	sound_deagle(SDL_Event *event, t_init *init, t_win *win)
+{
+	if (event->type == SDL_KEYDOWN && event->key.repeat == 0)
+		if (event->key.keysym.sym == SDLK_r && init->bullet != 0)
+		{
+			system("afplay ./media/sound/deagle_reload.mp3&");
+			init->bullet = 0;
+		}
+	if (init->bullet < 12)
+		if(event->type == SDL_MOUSEBUTTONDOWN)
+			if (event->button.button == SDL_BUTTON_LEFT)
+			{
+				flash(win);
+				system("afplay ./media/sound/deagle_fire.mp3&");
+				init->bullet++;
+			}
+	if (init->bullet == 12)
+		if(event->type == SDL_MOUSEBUTTONDOWN)
+			if (event->button.button == SDL_BUTTON_LEFT)
+				system("afplay ./media/sound/empty_gun.mp3&");
 }
 
 void	start(t_win *win, SDL_Event *event)
@@ -130,6 +136,8 @@ void	start(t_win *win, SDL_Event *event)
 		SDL_BlitSurface(win->title_screen, &win->srcrect, win->g_screen_surface,
 				&win->dstrect);
 		SDL_RenderPresent(win->render);
+		SDL_FreeSurface(win->title_screen);
+		SDL_FreeSurface(win->g_screen_surface);
 		SDL_PollEvent(event);
 		if (SDL_KEYDOWN)
 		{
@@ -154,6 +162,7 @@ void	deagle(t_win *win)
 	pos_deagle.y = 0;
 	deagle = IMG_Load("./media/pics/deagle.png");
 	SDL_BlitSurface(deagle, NULL, win->g_screen_surface, &pos_deagle);
+	SDL_FreeSurface(deagle);
 }
 
 void	flash(t_win *win)
@@ -165,4 +174,5 @@ void	flash(t_win *win)
 	pos_flash.y = 40;
 	flash = IMG_Load("./media/pics/fire.png");
 	SDL_BlitSurface(flash, NULL, win->g_screen_surface, &pos_flash);
+	SDL_FreeSurface(flash);
 }

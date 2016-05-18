@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 11:18:20 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/17 23:40:28 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/18 10:36:27 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int		init_window(char *win_name, int width, int height, t_win *win)
 {
 	win->loop = 1;
 	SDL_Init(SDL_INIT_VIDEO);
-	win->win = SDL_CreateWindow(win_name, 0, 0, width, height, SDL_WINDOW_OPENGL);
+	win->win = SDL_CreateWindow(win_name, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height,
+			SDL_WINDOW_OPENGL);
 	if (win->win == NULL)
 	{
 		ft_putstr("Could not create window : ");
