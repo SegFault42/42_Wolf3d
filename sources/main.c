@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 17:40:10 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/18 17:14:46 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/18 17:19:17 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	main(int argc, char **argv)
 	start(&win, &event);
 	ambient();
 	deagle(&win);
-	/*init_joystick(&init);*/
 	while (win.loop)
 	{
 		while (init.x < init.width)

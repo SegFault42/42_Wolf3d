@@ -6,50 +6,11 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 14:58:09 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/18 17:18:06 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/18 18:00:32 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Wolf3d.h"
-
-void	init_joystick(t_init *init)
-{
-	init->joystick = NULL;
-	int				num_joystick;
-
-	if (SDL_Init(SDL_INIT_JOYSTICK) == -1)
-		ft_putendl("Failed to init Joystick.");
-	else
-		ft_putendl("Joystick initialization [ok]");
-	num_joystick = SDL_NumJoysticks();
-	printf("found %d controller\n", num_joystick);
-	if (num_joystick >= 1)
-	{
-		init->joystick = SDL_JoystickOpen(0);
-		if (init->joystick == NULL)
-			ft_putendl("PLAYSTATION(R)3 Controller error.");
-		else
-			ft_putendl("Joystick found : PLAYSTATION(R)3 Controller.");
-		printf("Nombre de boutons : %d\n",SDL_JoystickNumButtons(init->joystick));
-	}
-}
-
-void	event_joystick(t_init *init)
-{
-	SDL_Event	event;
-
-	SDL_JoystickEventState(SDL_ENABLE);
-	SDL_WaitEvent(&event);
-	if (event.type == SDL_JOYBUTTONDOWN)
-	{
-		if (event.jbutton.state == SDL_PRESSED)
-		{
-				/*flash(win);*/
-				system("afplay ./media/sound/deagle_fire.mp3&");
-				init->bullet++;
-		}
-	}
-}
 
 void	move_w_s(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf)
 {
@@ -116,7 +77,6 @@ void	keyboard(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf)
 			init->old_dir_x = init->dir_x;
 			init->old_plane_x = init->plane_x;
 			move_a_d(event, win, init, wolf);
-			event_joystick(init);
 		}
 		sound_deagle(event, init, win);
 	}
@@ -178,14 +138,19 @@ void	start(t_win *win, SDL_Event *event)
 
 void	deagle(t_win *win)
 {
+	int weapon;
 	SDL_Surface *deagle;
 	SDL_Rect pos_deagle;
 
+	weapon = 2;
 	pos_deagle.x = 0;
 	pos_deagle.y = 0;
-	deagle = IMG_Load("./media/pics/deagle.png");
-	SDL_BlitSurface(deagle, NULL, win->g_screen_surface, &pos_deagle);
-	SDL_FreeSurface(deagle);
+	if (weapon % 2 == 1)
+		deagle = IMG_Load("./media/pics/deagle.png");
+	else
+		deagle = IMG_Load("./media/pics/ak_47.png");
+		SDL_BlitSurface(deagle, NULL, win->g_screen_surface, &pos_deagle);
+		SDL_FreeSurface(deagle);
 }
 
 void	flash(t_win *win)
