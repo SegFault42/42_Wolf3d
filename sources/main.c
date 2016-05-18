@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 17:40:10 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/18 10:57:18 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/18 12:20:52 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	main(int argc, char **argv)
 	set_icon(&win);
 	start(&win, &event);
 	ambient();
-		deagle(&win);
+	deagle(&win);
+	init_joystick();
 	while (win.loop)
 	{
 		while (init.x < init.width)

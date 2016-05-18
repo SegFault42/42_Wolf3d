@@ -6,28 +6,48 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 14:58:09 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/18 10:59:05 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/18 12:20:09 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Wolf3d.h"
 
-/*void	mouse(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf)*/
-/*{*/
-	/*[>SDL_MouseMotionEvent *motion;<]*/
+void	init_joystick(void)
+{
+	SDL_Joystick *joystick = NULL;
+	int numJoystick = SDL_NumJoysticks();
 
-	/*[>motion = &event->motion;<]*/
-	/*[>if (SDL_MOUSEMOTION > 0 && SDL_MOUSEMOTION < 1280)<]*/
-	/*int x = 0;*/
-	/*int y = 0;*/
+	if (SDL_INIT_JOYSTICK < 0)
+		ft_putendl("Cannot initialize joystick.");
+	printf("found %d controller\n", numJoystick);
+	if (numJoystick >= 1)
+	{
+		/*ft_putendl("Joystick found : PLAYSTATION(R)3 Controller.");*/
+		printf("Joystick found : %s.\n", SDL_JoystickName(0));
+		printf("Nombre de boutons : %d\n",SDL_JoystickNumButtons(joystick));
+		joystick = SDL_JoystickOpen(0);
+		if (joystick == NULL)
+			ft_putendl("PLAYSTATION(R)3 Controller error.");
+		/*else*/
+			/*ft_putendl("PLAYSTATION(R)3 Controller ready.");*/
+	}
+}
 
-	/*if (event->type == SDL_MOUSEMOTION)*/
-	/*{*/
-		/*x = event->motion.x;*/
-		/*y = event->motion.y;*/
-	/*}*/
-	/*printf("x = %d, y = %d\n", x, y);*/
-/*}*/
+void	joystick(void)
+{
+	SDL_Event event;
+
+	init_joystick();
+	SDL_WaitEvent(&event);
+	SDL_JoystickEventState(SDL_ENABLE);
+	if (event.type == SDL_JOYBUTTONDOWN || event.type == SDL_JOYBUTTONUP)
+	{
+		if (event.jbutton.state == SDL_PRESSED)
+			printf("Appui sur le bouton %d du joystick %d\n", event.jbutton.button, event.jbutton.which);
+		else if (event.jbutton.state == SDL_RELEASED)
+			printf("Appui sur le bouton %d du joystick %d\n", event.jbutton.button, event.jbutton.which);
+	}
+}
 
 void	move_w_s(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf)
 {

@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 11:18:20 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/18 10:36:27 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/18 11:32:10 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,16 @@
 int		init_window(char *win_name, int width, int height, t_win *win)
 {
 	win->loop = 1;
-	SDL_Init(SDL_INIT_VIDEO);
+	if (SDL_Init(SDL_INIT_VIDEO) == -1)
+	{
+		ft_putendl("Failed to init SDL Video.");
+		return (EXIT_FAILURE);
+	}
+	if (SDL_Init(SDL_INIT_JOYSTICK) == -1)
+	{
+		ft_putendl("Failed to init Joystick.");
+		return (EXIT_FAILURE);
+	}
 	win->win = SDL_CreateWindow(win_name, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height,
 			SDL_WINDOW_OPENGL);
 	if (win->win == NULL)
