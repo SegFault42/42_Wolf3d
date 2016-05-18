@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 14:58:09 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/18 22:17:48 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/19 00:25:44 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,17 +156,12 @@ void	deagle(t_init *init, t_win *win, SDL_Event *event)
 	pos_deagle.x = 0;
 	pos_deagle.y = 0;
 	if(event->type == SDL_MOUSEBUTTONDOWN)
-	{
 		if (event->button.button == SDL_BUTTON_X1)
 		{
 			init->weapon++;
 		}
-	}
 	if (init->weapon % 2 == 1)
-	{
 		deagle = IMG_Load("./media/pics/ak_47.png");
-		ft_debug();
-	}
 	else if (init->weapon % 2 != 1)
 		deagle = IMG_Load("./media/pics/deagle.png");
 		SDL_BlitSurface(deagle, NULL, win->g_screen_surface, &pos_deagle);
