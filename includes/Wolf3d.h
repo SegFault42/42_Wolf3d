@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 12:52:14 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/18 16:20:36 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/18 22:16:31 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct		s_init
 	double			old_plane_x;
 	int				nb;
 	int				bullet;
-	SDL_Joystick	*joystick;
+	int				weapon;
 
 }					t_init;
 
@@ -115,6 +115,7 @@ void				render(t_wolf *wo, t_win *w, t_init *i);
 */
 void				red(t_wolf *wolf);
 void				green(t_wolf *wolf);
+void				deagle(t_init *init, t_win *win, SDL_Event *event);
 void				blue(t_wolf *wolf);
 void				white(t_wolf *wolf);
 void				defaut(t_wolf *wolf);
@@ -137,7 +138,8 @@ void				walk(t_init *init, t_wolf *wolf);
 int					world_map(int x, int y);
 
 int					set_icon(t_win *win);
-void				deagle(t_win *win);
+void				deagle(t_init *init, t_win *win, SDL_Event *event);
+void				weapon(t_win *win);
 void				flash(t_win *win);
 void				sound_deagle(SDL_Event *event, t_init *init, t_win *win);
 void				init_joystick();

@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 17:40:10 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/18 17:19:17 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/18 22:16:33 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 	set_icon(&win);
 	start(&win, &event);
 	ambient();
-	deagle(&win);
+	weapon(&win);
 	while (win.loop)
 	{
 		while (init.x < init.width)
@@ -54,7 +54,7 @@ int	main(int argc, char **argv)
 		}
 		init.x = 0;
 		keyboard(&event, &win, &init, &wolf);
-		deagle(&win);
+		deagle(&init, &win, &event);
 		SDL_RenderPresent(win.render);
 		/*mouse(&event, &win, &init, &wolf);*/
 	}

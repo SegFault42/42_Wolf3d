@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 11:18:20 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/18 10:32:17 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/18 22:06:34 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	init_pos(t_init *init)
 	init->move_speed = 0.15;
 	init->rot_speed = 0.1;
 	init->bullet = 0;
+	init->weapon = 2;
 }
 
 void	init_env(t_wolf *wolf, t_init *init)
