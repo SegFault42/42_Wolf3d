@@ -6,13 +6,13 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 14:58:09 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/19 13:00:32 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/19 17:47:28 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf.h"
 
-void	move_w_s(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf)
+void	move_w_s(SDL_Event *event, t_init *init, t_wolf *wolf)
 {
 	if (event->key.keysym.sym == SDLK_w)
 	{
@@ -36,7 +36,7 @@ void	move_w_s(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf)
 	}
 }
 
-void	move_a_d(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf)
+void	move_a_d(SDL_Event *event, t_init *init)
 {
 	if (event->key.keysym.sym == SDLK_d)
 	{
@@ -68,14 +68,14 @@ void	keyboard(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf)
 	{
 		if (event->type == SDL_QUIT)
 			win->loop = 0;
-		if (SDL_KEYDOWN)
+		if (event->key.type == SDL_KEYDOWN)
 		{
 			if (event->key.keysym.sym == SDLK_ESCAPE)
 				win->loop = 0;
 			init->old_dir_x = init->dir_x;
 			init->old_plane_x = init->plane_x;
-			move_w_s(event, win, init, wolf);
-			move_a_d(event, win, init, wolf);
+			move_w_s(event, init, wolf);
+			move_a_d(event, init);
 		}
 		sound_deagle(event, init, win);
 	}
@@ -99,22 +99,22 @@ void	start(t_win *win, SDL_Event *event)
 		SDL_RenderPresent(win->render);
 		SDL_FreeSurface(win->title_screen);
 		SDL_FreeSurface(win->g_screen_surface);
-		SDL_PollEvent(event);
 		sound_start(event, &loop);
 	}
 }
 
 void	sound_start(SDL_Event *event, int *loop)
 {
-	if (SDL_KEYDOWN)
-	{
-		if (event->key.keysym.sym == SDLK_ESCAPE || event->type == SDL_QUIT)
-			exit(1);
-		else if (event->key.keysym.sym == SDLK_SPACE)
+	while (SDL_PollEvent(event))
+		if (SDL_KEYDOWN)
 		{
-			system("afplay ./media/sound/start.mp3&");
-			SDL_Delay(1000);
-			*loop = 0;
+			if (event->key.keysym.sym == SDLK_ESCAPE || event->type == SDL_QUIT)
+				exit(1);
+			else if (event->key.keysym.sym == SDLK_SPACE)
+			{
+				system("afplay ./media/sound/start.mp3&");
+				SDL_Delay(1000);
+				*loop = 0;
+			}
 		}
-	}
 }

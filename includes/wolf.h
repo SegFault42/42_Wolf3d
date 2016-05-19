@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 12:52:14 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/19 13:22:58 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/19 18:11:11 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,11 +120,9 @@ void				defaut(t_wolf *wolf);
 ** keyboard.c
 */
 void				keyboard(SDL_Event *event, t_win *win, t_init *init,
-		t_wolf *wolf);
-void				move_w_s(SDL_Event *event, t_win *win, t_init *init,
-		t_wolf *wolf);
-void				move_a_d(SDL_Event *event, t_win *win, t_init *init,
-		t_wolf *wolf);
+					t_wolf *wolf);
+void				move_w_s(SDL_Event *event, t_init *init, t_wolf *wolf);
+void				move_a_d(SDL_Event *event, t_init *init);
 void				start(t_win *win, SDL_Event *event);
 void				sound_start(SDL_Event *event, int *loop);
 /*

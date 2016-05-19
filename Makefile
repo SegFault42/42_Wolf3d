@@ -1,56 +1,76 @@
-NAME		= wolf3d 
-CC			= clang
-LIBDIR		= lib
-SDLIBDIR	= libsdl
-EXPECTED	=" 	lib/libsdl/libSDL2-2.0.0.dylib (compatibility version 5.0.0, current version 5.0.0)"
-OUTPUT		:= "$(shell otool -L  $(NAME)| awk NR==2)"
-INC			= include/wolf3d.h
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
+#    Updated: 2016/05/19 18:01:43 by rabougue         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
+####################################_COLOR_#####################################
+GREEN = \033[38;5;10m
+GREY = \033[38;5;60m
+END = \033[0m
+##################################_COMPILATION_#################################
+CC = clang
+FLAG = -O3 -Wall -Wextra -Werror
+LFT = ./libft/libft.a
+LSDL = -L ./libsdl/ -lSDL2
+INCLUDE = -I ./includes/wolf.h -I ./libft/includes/ -I ./includes/SDL2/
+OBJS = ./main.o \
+	   ./window.o \
+	   ./init.o \
+	   ./wolf.o \
+	   ./color.o \
+	   ./keyboard.o \
+	   ./sound.o \
+	   ./map.o \
+	   ./weapon.o \
 
-OBJDIR		= obj
-LIBSDL		= -L$(LIBDIR)/$(SDLIBDIR) -lSDL2
-LIB 		:= lib/libft/libft.a
-FLAGS 		:= -Wall -Werror -Wextra -O3 
-LIBGRPH 	:= -framework OpenGL
-INCLUDES 	:= -I include -I lib/libft/includes -I include/SDL2
-SDLDYLIB	:= $(LIBDIR)/$(SDLIBDIR)/libSDL2-2.0.0.dylib
-SDLIMG		:= $(LIBDIR)/$(SDLIBDIR)/SDL2_image
-SDL2		:= $(LIBDIR)/$(SDLIBDIR)/SDL2
-OBJS 		:=	$(OBJDIR)/main.o \
-				$(OBJDIR)/init.o \
-				$(OBJDIR)/init2.o \
-				$(OBJDIR)/map.o \
-				$(OBJDIR)/init_map.o \
-				$(OBJDIR)/move_events.o \
-				$(OBJDIR)/colors.o \
-				$(OBJDIR)/colors2.o \
-				$(OBJDIR)/draw.o \
-				$(OBJDIR)/calculate.o \
+NAME = wolf3d
+FRAMEWORK = -framework OpenGL
+##################################_CHANGE_PATH_#################################
+SDL2DYLIB = ./libsdl/libSDL2-2.0.0.dylib
+SDL2_image = ./libsdl/SDL2_image
+##################################_RELINK_MODIFY_.h#############################
+RELINK_H = ./includes/wolf.h
 
-.PHONY: all clean fclean re
-
-VPATH = source
+VPATH = sources/
 
 all: $(NAME)
 
-$(NAME): $(LIB) $(OBJS)
-	$(CC) $(FLAGS) $(LIB) $(LIBSDL) $(INCLUDES) $(OBJS)  -o $(NAME) $(LIBGRPH) $(SDLIMG)
-	@install_name_tool -change /usr/local/lib/libSDL2-2.0.0.dylib $(SDLDYLIB) $(NAME)
-	@install_name_tool -change @rpath/SDL2_image.framework/Versions/A/SDL2_image $(SDLIMG) $(NAME)
-	@install_name_tool -change @rpath/SDL2.framework/Versions/A/SDL2 $(SDLDYLIB) $(SDLIMG)
+$(NAME): $(OBJS)
+	@printf "$(GREY)Compiling libft.a ...$(GREY)"
+	@make -s -C ./libft/
+	@printf "                   [$(GREEN)Success$(GREY)]\n"
+	@printf "Compiling .o ..."
+	@printf "                        [$(GREEN)Success$(GREY)]\n"
+	@printf "Compiling wolf3d ..."
+	@$(CC) $(FLAG) $(LFT) $(LSDL) $(INCLUDE) $(OBJS) -o $(NAME) $(FRAMEWORK)\
+		$(SDL2_image)
+	@printf "                    [$(GREEN)Success$(GREY)]\n$(END)"
+	@install_name_tool -change /usr/local/lib/libSDL2-2.0.0.dylib $(SDL2DYLIB)\
+		$(NAME)
+	@install_name_tool -change \
+		@rpath/SDL2_image.framework/Versions/A/SDL2_image $(SDL2_image) $(NAME)
+	@install_name_tool -change lib/libsdl/libSDL2-2.0.0.dylib $(SDL2DYLIB)\
+		$(SDL2_image)
 
-$(LIB):
-	make -C lib/libft/
-
-$(OBJDIR)/%.o : %.c $(INC)
-	@mkdir -p $(OBJDIR) 
-	$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
+%.o : %.c ${RELINK_H}
+	@$(CC) -c $(FLAG) $< -o $@
 
 clean:
-	rm -rf $(OBJDIR) 
+	@printf "$(GREY)deleting all .o ...$(END)"
+	@rm -f $(OBJS)
+	@printf " [$(GREEN)Success$(GREY)]\n$(END)"
 
-fclean: clean
-	make fclean -C lib/libft/
-	rm -f $(NAME)
+fclean:
+	@printf "$(GREY)Deleting libft.a, all .o and Wolf3d ...$(END)"
+	@rm -f $(NAME) $(OBJS)
+	@make -s fclean -C ./libft/
+	@printf " $(GREY)[$(GREEN)Success$(GREY)]\n$(END)"
 
 re: fclean all
