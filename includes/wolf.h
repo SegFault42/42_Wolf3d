@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 12:52:14 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/19 12:57:07 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/19 13:22:58 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,8 +143,12 @@ void				deagle(t_init *init, t_win *win, SDL_Event *event);
 void				weapon(t_win *win);
 void				flash(t_win *win);
 void				sound_deagle(SDL_Event *event, t_init *init, t_win *win);
-
-void				init_joystick();
-void				event_joystick();
+/*
+** main.c
+*/
 int					set_icon(t_win *win);
+int					check_arg(int argc);
+int					main(int argc, char **argv);
+int					check_arg(int argc);
+
 #endif
