@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 17:40:10 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/19 20:24:13 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/19 20:56:04 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,25 +69,28 @@ void	split_main(t_init *init, t_wolf *wolf, t_win *win)
 
 int		main(int argc, char **argv)
 {
-	t_win		win;
-	t_wolf		wolf;
-	t_init		init;
+	t_win		*win;
+	t_wolf		*wolf;
+	t_init		*init;
 	SDL_Event	event;
 
+	win = (t_win *)malloc(sizeof(t_win));
+	wolf = (t_wolf *)malloc(sizeof(t_wolf));
+	init = (t_init *)malloc(sizeof(t_init));
 	check_arg(argc);
-	init_pos(&init);
-	init_window("Wolf3d", init.width, init.height, &win);
-	set_icon(&win);
-	start(&win, &event);
+	init_pos(init);
+	init_window("Wolf3d", init->width, init->height, win);
+	set_icon(win);
+	start(win, &event);
 	ambient();
-	while (win.loop)
+	while (win->loop)
 	{
-		init.x = 0;
-		keyboard(&event, &win, &init, &wolf);
-		SDL_RenderPresent(win.render);
-		split_main(&init, &wolf, &win);
+		init->x = 0;
+		keyboard(&event, win, init, wolf);
+		SDL_RenderPresent(win->render);
+		split_main(init, wolf, win);
 	}
-	close_window(&win);
+	close_window(win);
 	(void)argv;
 	return (0);
 }
