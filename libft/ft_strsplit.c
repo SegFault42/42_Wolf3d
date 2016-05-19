@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 13:39:24 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/04 09:19:29 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/19 20:21:05 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static void	ft_split_tab(char const *s, char **str, char c, int *j)
 	int len;
 	int i;
 
-	len = 0;
 	i = 0;
 	while (s[i] != '\0')
 	{

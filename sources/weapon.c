@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 12:44:02 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/19 12:52:36 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/19 20:20:36 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	deagle(t_init *init, t_win *win, SDL_Event *event)
 	SDL_Surface	*deagle;
 	SDL_Rect	pos_deagle;
 
+	deagle = NULL;
 	pos_deagle.x = 0;
 	pos_deagle.y = 0;
 	if (event->button.button == SDL_SCANCODE_1)

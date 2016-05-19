@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 17:40:10 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/19 17:29:40 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/19 20:24:13 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ int		main(int argc, char **argv)
 		keyboard(&event, &win, &init, &wolf);
 		SDL_RenderPresent(win.render);
 		split_main(&init, &wolf, &win);
-		printf("loop = %d\n", win.loop);
 	}
 	close_window(&win);
 	(void)argv;
