@@ -6,11 +6,11 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 17:40:10 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/19 00:22:32 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/19 12:26:54 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Wolf3d.h"
+#include "../includes/wolf.h"
 
 int	set_icon(t_win *win)
 {
@@ -24,6 +24,32 @@ int	set_icon(t_win *win)
 	return (EXIT_SUCCESS);
 }
 
+int	check_arg(int argc)
+{
+	if (argc != 1)
+	{
+		ft_putendl("Usage : No argument needed.");
+		exit(1);
+	}
+	else
+	{
+		ft_putendl("\033[32m**********************\033[0m");
+		ft_putendl("\033[32m* Wolf3d by Rabougue *\033[0m");
+		ft_putendl("\033[32m**********************\033[0m");
+		ft_putendl("\033[32m* Move forward = W   *\033[0m");
+		ft_putendl("\033[32m* Move backward = S  *\033[0m");
+		ft_putendl("\033[32m* Rotate left = A    *\033[0m");
+		ft_putendl("\033[32m* Rotate right = D   *\033[0m");
+		ft_putendl("\033[32m* Fire = click left  *\033[0m");
+		ft_putendl("\033[32m*     Reload = R     *\033[0m");
+		ft_putendl("\033[32m*      AK 47 = 1     *\033[0m");
+		ft_putendl("\033[32m*     Deagle = 2     *\033[0m");
+		ft_putendl("\033[32m*     Quit = Esc     *\033[0m");
+		ft_putendl("\033[32m**********************\033[0m");
+	}
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_win		win;
@@ -31,12 +57,12 @@ int	main(int argc, char **argv)
 	t_init		init;
 	SDL_Event	event;
 
+	check_arg(argc);
 	init_pos(&init);
 	init_window("Wolf3d", init.width, init.height, &win);
 	set_icon(&win);
 	start(&win, &event);
 	ambient();
-	weapon(&win);
 	while (win.loop)
 	{
 		while (init.x < init.width)
@@ -54,9 +80,7 @@ int	main(int argc, char **argv)
 		}
 		init.x = 0;
 		keyboard(&event, &win, &init, &wolf);
-		deagle(&init, &win, &event);
 		SDL_RenderPresent(win.render);
-		/*mouse(&event, &win, &init, &wolf);*/
 	}
 	close_window(&win);
 	return (0);

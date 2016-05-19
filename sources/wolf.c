@@ -6,11 +6,11 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 11:45:06 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/16 18:40:55 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/19 12:27:24 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Wolf3d.h"
+#include "../includes/wolf.h"
 
 void	calc_step(t_wolf *w)
 {

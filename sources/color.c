@@ -6,11 +6,11 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 14:16:13 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/16 18:22:38 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/19 12:26:26 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Wolf3d.h"
+#include "../includes/wolf.h"
 
 void	red(t_wolf *wolf)
 {

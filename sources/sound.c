@@ -6,11 +6,11 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 02:07:31 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/16 17:55:38 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/19 12:27:10 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Wolf3d.h"
+#include "../includes/wolf.h"
 
 void	walk(t_init *init, t_wolf *wolf)
 {

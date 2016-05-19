@@ -6,11 +6,11 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 11:18:20 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/18 16:13:12 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/19 12:27:17 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Wolf3d.h"
+#include "../includes/wolf.h"
 
 int		init_window(char *win_name, int width, int height, t_win *win)
 {

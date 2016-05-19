@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Wolf3d.h                                           :+:      :+:    :+:   */
+/*   wolf.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 12:52:14 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/18 22:16:31 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/19 12:57:07 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WOLF3D_H
-# define WOLF3D_H
+#ifndef WOLF_H
+# define WOLF_H
 
-# include <stdio.h> // a supprimer.
 # include <stdlib.h>
 # include <math.h>
 # include "../libft/includes/libft.h"
 # include "./SDL2/SDL.h"
-# include "../includes/SDL2/SDL_video.h"
 # include "../includes/SDL2/SDL_image.h"
 
-# define SDL_SRCCOLORKEY 0x00001000
 # define MAPWIDTH 24
 # define MAPHEIGHT 24
 
@@ -122,11 +119,14 @@ void				defaut(t_wolf *wolf);
 /*
 ** keyboard.c
 */
-void				keyboard(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf);
-void				mouse(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf);
-void				move_w_s(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf);
-void				move_a_d(SDL_Event *event, t_win *win, t_init *init, t_wolf *wolf);
+void				keyboard(SDL_Event *event, t_win *win, t_init *init,
+		t_wolf *wolf);
+void				move_w_s(SDL_Event *event, t_win *win, t_init *init,
+		t_wolf *wolf);
+void				move_a_d(SDL_Event *event, t_win *win, t_init *init,
+		t_wolf *wolf);
 void				start(t_win *win, SDL_Event *event);
+void				sound_start(SDL_Event *event, int *loop);
 /*
 ** sound.c
 */
@@ -136,13 +136,15 @@ void				walk(t_init *init, t_wolf *wolf);
 ** map.c
 */
 int					world_map(int x, int y);
-
-int					set_icon(t_win *win);
+/*
+** weapon.c
+*/
 void				deagle(t_init *init, t_win *win, SDL_Event *event);
 void				weapon(t_win *win);
 void				flash(t_win *win);
 void				sound_deagle(SDL_Event *event, t_init *init, t_win *win);
+
 void				init_joystick();
 void				event_joystick();
-
+int					set_icon(t_win *win);
 #endif

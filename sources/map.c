@@ -6,11 +6,11 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 18:47:57 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/16 18:50:27 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/19 12:27:01 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Wolf3d.h"
+#include "../includes/wolf.h"
 
 int		world_map(int x, int y)
 {
