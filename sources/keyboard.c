@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 14:58:09 by rabougue          #+#    #+#             */
-/*   Updated: 2016/05/19 17:47:28 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/05/21 12:28:26 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	start(t_win *win, SDL_Event *event)
 void	sound_start(SDL_Event *event, int *loop)
 {
 	while (SDL_PollEvent(event))
-		if (SDL_KEYDOWN)
+		if (event->key.type == SDL_KEYDOWN)
 		{
 			if (event->key.keysym.sym == SDLK_ESCAPE || event->type == SDL_QUIT)
 				exit(1);
