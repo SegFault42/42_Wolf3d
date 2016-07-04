@@ -1,0 +1,6 @@
+{
+  "name": "42 wolf3d",
+  "tagline": "Final mark 125/100",
+  "body": "![wolf](http://puu.sh/p3qyi/430d3dbbe0.png)\r\n\r\n# Wolf 3D\r\n\r\nRésumé: Ce projet consiste à crée un labyrinthe en utilisant la methode du raycating.\r\n\r\nLien du sujet : [Wolf3D.pdf][Wolf3D]\r\n\r\n### Langage autorisé:\r\n\r\n- C\r\n\r\n### Fonctions autorisées :\r\n- open\r\n- read\r\n- write\r\n- close\r\n- malloc\r\n- free\r\n- perror\r\n- strerror\r\n- exit\r\n- toutes les fonctions de la MiniLibX ou n'importe quel autre lib graphique.\r\n- toutes les fonctions de la lib math\r\n\r\n\r\n   [Wolf3D]: <https://github.com/SegFault42/42_Wolf3d/blob/master/wolf3d.pdf>\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
